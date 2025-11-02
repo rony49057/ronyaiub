@@ -29,6 +29,7 @@
     display:flex; flex-wrap:wrap; justify-content:center; gap:20px;
   }
 
+  /* Card Styling with dynamic hover */
   .card{
     background:#fff; /* white card */
     border-radius:15px;
@@ -36,13 +37,17 @@
     padding:25px;
     width:350px;
     color:#000;
-    transition:transform 0.3s, box-shadow 0.3s, opacity 1s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease, background 0.3s ease;
     opacity:0;
   }
-  .card.show{opacity:1;}
+
+  .card.show{ opacity:1; }
+
   .card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 15px 30px rgba(0,0,0,0.3);
+    transform: scale(1.05); /* slightly enlarge */
+    box-shadow:0 20px 40px rgba(0,0,0,0.3); /* stronger shadow */
+    border:2px solid #007bff; /* border glow */
+    background: linear-gradient(135deg,#ffffff,#e6f7ff); /* subtle gradient */
   }
 
   .profile-pic{
@@ -74,7 +79,7 @@
     transition: background 0.3s;
   }
   .info p:hover{
-    background: rgba(0,123,255,0.1); /* subtle hover highlight */
+    background: rgba(0,123,255,0.1); /* subtle highlight */
   }
 
   .links{ display:flex; justify-content:center; gap:15px; margin-top:15px; }
@@ -251,4 +256,3 @@ document.addEventListener("DOMContentLoaded", function(){
 
 </body>
 </html>
-
