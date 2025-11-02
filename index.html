@@ -6,216 +6,234 @@
 <title>Asaduzzaman Rony - Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    font-family:'Roboto',sans-serif;
-    background: linear-gradient(135deg,#74ebd5,#ACB6E5);
-    color:#333;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    padding:20px;
-    transition: background 0.5s, color 0.5s;
-  }
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:'Roboto',sans-serif;
+  background: linear-gradient(135deg,#74ebd5,#ACB6E5);
+  color:#333;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:20px;
+  transition: background 0.5s, color 0.5s;
+}
 
-  h1{text-align:center; margin-bottom:30px; color:#000000; transition: color 0.5s;}
-  h2{
-    text-align:center;
-    margin-bottom:15px;
-    color:#007bff;
-    padding:5px 0;
-  }
+h1{text-align:center; margin-bottom:30px; color:#000000; transition: color 0.5s;}
+h2{
+  text-align:center;
+  margin-bottom:15px;
+  color:#007bff;
+  padding:5px 0;
+}
 
-  .cards-container{
-    display:flex; flex-wrap:wrap; justify-content:center; gap:20px;
-  }
+.cards-container{
+  display:flex; flex-wrap:wrap; justify-content:center; gap:20px;
+}
 
-  .card{
-    background:#fff;
-    border-radius:15px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.2);
-    padding:25px;
-    width:350px;
-    color:#000;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease, background 0.3s ease;
-    opacity:0;
-  }
+/* Card Styling with scroll animation */
+.card{
+  background:#fff;
+  border-radius:15px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+  padding:25px;
+  width:350px;
+  color:#000;
+  opacity:0;
+  transform: translateY(50px);
+  transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s ease, border 0.3s ease, background 0.3s ease;
+}
+.card.show{
+  opacity:1;
+  transform: translateY(0);
+}
+.card:hover{
+  transform: scale(1.05);
+  box-shadow:0 20px 40px rgba(0,0,0,0.3);
+  border:2px solid #007bff;
+  background: linear-gradient(135deg,#ffffff,#e6f7ff);
+}
 
-  .card.show{ opacity:1; }
+.profile-pic{
+  display:block;
+  width:130px; height:130px;
+  border-radius:50%;
+  border:4px solid #007bff;
+  margin:0 auto 20px auto;
+  object-fit:cover;
+  transition:transform 0.3s;
+}
+.profile-pic:hover{transform:scale(1.1);}
 
-  .card:hover{
-    transform: scale(1.05);
-    box-shadow:0 20px 40px rgba(0,0,0,0.3);
-    border:2px solid #007bff;
-    background: linear-gradient(135deg,#ffffff,#e6f7ff);
-  }
+.bio{
+  font-weight:bold;
+  font-style:italic;
+  text-align:center;
+  color:#007bff;
+  min-height:26px;
+  margin-bottom:15px;
+}
+.bio::after{ content:'|'; animation: blink 0.7s infinite; }
+@keyframes blink{ 0%,50%,100%{opacity:1;} 25%,75%{opacity:0;} }
 
-  .profile-pic{
-    display:block;
-    width:130px; height:130px;
-    border-radius:50%;
-    border:4px solid #007bff;
-    margin:0 auto 20px auto;
-    object-fit:cover;
-    transition:transform 0.3s;
-  }
-  .profile-pic:hover{transform:scale(1.1);}
+.info p{
+  margin:8px 0;
+  padding:6px 8px;
+  border-radius:5px;
+  transition: background 0.3s;
+}
+.info p:hover{ background: rgba(0,123,255,0.1); }
 
-  .bio{
-    font-weight:bold;
-    font-style:italic;
-    text-align:center;
-    color:#007bff;
-    min-height:26px;
-    margin-bottom:15px;
-  }
-  .bio::after{ content:'|'; animation: blink 0.7s infinite; }
-  @keyframes blink{ 0%,50%,100%{opacity:1;} 25%,75%{opacity:0;} }
+.links{ display:flex; justify-content:center; gap:15px; margin-top:15px; }
+.links a{
+  text-decoration:none;
+  color:white;
+  background-color:#007bff;
+  padding:8px 14px;
+  border-radius:8px;
+  font-weight:bold;
+  transition: all 0.3s ease, box-shadow 0.3s;
+}
+.links a:hover{
+  background-color:#28a745;
+  transform:scale(1.1);
+  box-shadow:0 0 8px #28a745;
+}
 
-  .info p{
-    margin:8px 0;
-    padding:6px 8px;
-    border-radius:5px;
-    transition: background 0.3s;
-  }
-  .info p:hover{
-    background: rgba(0,123,255,0.1);
-  }
+.skill{ margin:10px 0; }
+.skill-name{ font-weight:bold; }
+.skill-bar{
+  width:100%; background:#eee; border-radius:8px; overflow:hidden; margin-top:5px;
+}
+.skill-fill{
+  height:10px; width:0%; background:#007bff; border-radius:8px; transition: width 1.5s ease;
+}
 
-  .links{ display:flex; justify-content:center; gap:15px; margin-top:15px; }
-  .links a{
-    text-decoration:none;
-    color:white;
-    background-color:#007bff;
-    padding:8px 14px;
-    border-radius:8px;
-    font-weight:bold;
-    transition: all 0.3s ease, box-shadow 0.3s;
-  }
-  .links a:hover{
-    background-color:#28a745;
-    transform:scale(1.1);
-    box-shadow:0 0 8px #28a745;
-  }
+.projects{
+  display:flex; flex-wrap:wrap; justify-content:center; gap:15px; margin-top:15px;
+}
 
-  .skill{ margin:10px 0; }
-  .skill-name{ font-weight:bold; }
-  .skill-bar{
-    width:100%; background:#eee; border-radius:8px; overflow:hidden; margin-top:5px;
-  }
-  .skill-fill{
-    height:10px; width:0%; background:#007bff; border-radius:8px; transition: width 1.5s ease;
-  }
+/* Project Card with dynamic gradient border effect */
+.project-card {
+  background:#f7f7f7;
+  width:150px;
+  padding:15px;
+  border-radius:10px;
+  text-align:center;
+  position: relative;
+  overflow: hidden;
+  border:2px solid transparent;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.project-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, #007bff, #28a745, #ff9800, #ff4081);
+  background-size: 400% 400%;
+  filter: blur(10px);
+  opacity: 0;
+  transition: opacity 0.3s;
+  border-radius: 12px;
+  z-index: 0;
+  animation: gradientMove 8s linear infinite;
+}
+@keyframes gradientMove {
+  0%{background-position:0% 0%;}
+  50%{background-position:100% 100%;}
+  100%{background-position:0% 0%;}
+}
+.project-card:hover::before { opacity: 1; }
+.project-card a {
+  position: relative;
+  z-index: 1;
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+.project-card:hover a { color: #fff; }
+.project-card:hover { transform: scale(1.05); box-shadow:0 10px 20px rgba(0,0,0,0.3); }
 
-  .projects{
-    display:flex; flex-wrap:wrap; justify-content:center; gap:15px; margin-top:15px;
-  }
-  .project-card{
-    background:#f7f7f7;
-    width:150px;
-    padding:15px;
-    border-radius:10px;
-    text-align:center;
-    transition:transform 0.3s, box-shadow 0.3s;
-  }
-  .project-card:hover{
-    transform:scale(1.05);
-    box-shadow:0 10px 20px rgba(0,0,0,0.2);
-  }
-  .project-card a { text-decoration:none; color:#007bff; font-weight:bold; }
+footer{
+  margin-top:30px;
+  font-size:14px;
+  text-align:center;
+  color:#fff;
+  padding:10px 0;
+  width:100%;
+  border-radius:10px;
+  background: linear-gradient(270deg, #007bff, #28a745, #ff9800, #ff4081);
+  background-size: 800% 800%;
+  animation: footerBG 15s ease infinite;
+}
+@keyframes footerBG {
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
 
-  /* Footer with dynamic gradient background */
-  footer{
-    margin-top:30px;
-    font-size:14px;
-    text-align:center;
-    color:#fff;
-    padding:10px 0;
-    width:100%;
-    border-radius:10px;
-    background: linear-gradient(270deg, #007bff, #28a745, #ff9800, #ff4081);
-    background-size: 800% 800%;
-    animation: footerBG 15s ease infinite;
-  }
-  @keyframes footerBG {
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-  }
+@media(max-width:800px){
+  .cards-container{ flex-direction:column; align-items:center; }
+  .projects{ flex-direction:column; align-items:center; }
+}
 
-  @media(max-width:800px){
-    .cards-container{ flex-direction:column; align-items:center; }
-    .projects{ flex-direction:column; align-items:center; }
-  }
+/* Dark mode */
+body.dark-mode {
+  background: #000000;
+  color: #f0f0f0;
+}
+body.dark-mode h1 { color: #ffffff; }
+body.dark-mode .card { background:#111; color:#fff; border: 1px solid #333; }
+body.dark-mode .card:hover { background: #1a1a1a; border: 2px solid #00d1ff; }
+body.dark-mode .profile-pic { border:4px solid #00d1ff; }
+body.dark-mode .skill-fill { background:#00d1ff; }
+body.dark-mode .links a { background:#00d1ff; }
+body.dark-mode .links a:hover { background:#28a745; }
 
-  /* Dark mode */
-  body.dark-mode {
-    background: #000000;
-    color: #f0f0f0;
-  }
-  body.dark-mode h1 { color: #ffffff; }
-  body.dark-mode .card { background:#111; color:#fff; border: 1px solid #333; }
-  body.dark-mode .card:hover { background: #1a1a1a; border: 2px solid #00d1ff; }
-  body.dark-mode .profile-pic { border:4px solid #00d1ff; }
-  body.dark-mode .skill-fill { background:#00d1ff; }
-  body.dark-mode .links a { background:#00d1ff; }
-  body.dark-mode .links a:hover { background:#28a745; }
-
-  /* Dark mode icon responsive */
-  #theme-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-    font-size: 22px;
-    z-index: 1000;
-    transition: transform 0.3s;
-  }
-  #theme-toggle:hover { transform: rotate(25deg) scale(1.1); }
-  @media(max-width:500px){
-    #theme-toggle { top:10px; right:10px; font-size:18px; }
-  }
+/* Dark mode icon responsive */
+#theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  font-size: 22px;
+  z-index: 1000;
+  transition: transform 0.3s;
+}
+#theme-toggle:hover { transform: rotate(25deg) scale(1.1); }
+@media(max-width:500px){
+  #theme-toggle { top:10px; right:10px; font-size:18px; }
+}
 </style>
 </head>
 <body>
 
-<!-- Theme Toggle -->
 <div id="theme-toggle" title="Toggle Dark/Light Mode">🌙</div>
 
 <h1>Asaduzzaman Rony</h1>
 
 <div class="cards-container">
 
-  <!-- Personal Information Card -->
+  <!-- Personal Info -->
   <div class="card" id="personal-card">
     <h2>Personal Information</h2>
     <img src="profilepic.jpg" alt="Profile Picture" class="profile-pic">
     <div class="bio" id="bio"></div>
     <div class="info">
       <p><strong>DOB:</strong> 11 Dec</p>
-
-      <p><strong>University:</strong><br>
-        <b>American International University-Bangladesh</b><br>
-        BSc in Computer Science and Engineering
-      </p>
-
-      <p><strong>College:</strong><br>
-        <b>Ispahani Public School and College</b><br>
-        Completed in 2019
-      </p>
-
-      <p><strong>School:</strong><br>
-        <b>Comilla Cantonment High School</b><br>
-        Completed in 2017
-      </p>
-
+      <p><strong>University:</strong><br><b>American International University-Bangladesh</b><br>BSc in Computer Science and Engineering</p>
+      <p><strong>College:</strong><br><b>Ispahani Public School and College</b><br>Completed in 2019</p>
+      <p><strong>School:</strong><br><b>Comilla Cantonment High School</b><br>Completed in 2017</p>
       <p><strong>Blood Group:</strong> B+</p>
       <p><strong>Hobbies:</strong> Watching football ⚽, supporting Barcelona & Argentina</p>
       <p><strong>Languages:</strong> Bangla, English, Hindi</p>
     </div>
   </div>
 
-  <!-- Contact Info Card -->
+  <!-- Contact Info -->
   <div class="card" id="contact-card">
     <h2>Contact Information</h2>
     <div class="info">
@@ -230,7 +248,7 @@
     </div>
   </div>
 
-  <!-- Skills Card -->
+  <!-- Skills -->
   <div class="card" id="skills-card">
     <h2>Skills</h2>
     <div class="skill">
@@ -251,7 +269,7 @@
     </div>
   </div>
 
-  <!-- Projects Card -->
+  <!-- Projects -->
   <div class="card" id="projects-card">
     <h2>Projects</h2>
     <div class="projects">
@@ -269,50 +287,43 @@
 
 </div>
 
-<footer>
-  © 2025 Asaduzzaman Rony | All rights reserved.
-</footer>
+<footer>© 2025 Asaduzzaman Rony | All rights reserved.</footer>
 
 <script>
 document.addEventListener("DOMContentLoaded", function(){
-  const phrases = [
-    "Disciplined CSE student 💻",
-    "Passionate about coding 🚀",
-    "Football lover ⚽ | Barcelona & Argentina fan 💙♥️🇦🇷 "
-  ];
-  let i=0,j=0,current='',isDeleting=false;
+  // Bio typing
+  const phrases = ["Disciplined CSE student 💻","Passionate about coding 🚀","Football lover ⚽ | Barcelona & Argentina fan 💙♥️🇦🇷 "];
+  let i=0,j=0,isDeleting=false,current='';
   const bioEl = document.getElementById('bio');
   function type(){
     const full = phrases[i];
     current = isDeleting ? full.substring(0,j--) : full.substring(0,j++);
     bioEl.textContent = current;
-    if(!isDeleting && j === full.length){
-      isDeleting = true;
-      setTimeout(type,1500);
-    } else if(isDeleting && j === 0){
-      isDeleting = false;
-      i = (i+1) % phrases.length;
-      setTimeout(type,500);
-    } else {
-      setTimeout(type, isDeleting?50:100);
-    }
+    if(!isDeleting && j===full.length){ isDeleting=true; setTimeout(type,1500); }
+    else if(isDeleting && j===0){ isDeleting=false; i=(i+1)%phrases.length; setTimeout(type,500);}
+    else { setTimeout(type,isDeleting?50:100);}
   }
   type();
 
-  const cards = document.querySelectorAll('.card');
-  cards.forEach((card, idx)=>{ setTimeout(()=>{card.classList.add('show');}, idx*300); });
-
+  // Skill bars
   const fills = document.querySelectorAll('.skill-fill');
   const widths = ["90%","80%","70%","65%"];
-  fills.forEach((fill, idx)=>{ setTimeout(()=>{ fill.style.width = widths[idx]; }, 1000); });
+  fills.forEach((fill, idx)=>{ setTimeout(()=>{ fill.style.width=widths[idx]; },1000); });
 
+  // Dark mode toggle
   const themeToggle = document.getElementById('theme-toggle');
-  themeToggle.addEventListener('click', () => {
+  themeToggle.addEventListener('click',()=>{
     document.body.classList.toggle('dark-mode');
     themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
-    themeToggle.style.transform = 'scale(1.2)';
-    setTimeout(()=> themeToggle.style.transform='scale(1)',200);
   });
+
+  // Intersection Observer for scroll animation
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){ entry.target.classList.add('show'); observer.unobserve(entry.target); }
+    });
+  }, { threshold:0.2 });
+  document.querySelectorAll('.card').forEach(card=>observer.observe(card));
 });
 </script>
 
