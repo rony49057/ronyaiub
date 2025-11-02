@@ -16,25 +16,33 @@
     align-items:center;
     padding:20px;
   }
-  h1,h2{text-align:center; margin-bottom:15px;}
+
+  h1{text-align:center; margin-bottom:30px; color:#007bff;}
+  h2{
+    text-align:center;
+    margin-bottom:15px;
+    color:#007bff;
+    padding:5px 0;
+  }
 
   .cards-container{
     display:flex; flex-wrap:wrap; justify-content:center; gap:20px;
   }
 
   .card{
-    background-color:#fff;
+    background:#fff; /* white card */
     border-radius:15px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
     padding:25px;
     width:350px;
+    color:#000;
     transition:transform 0.3s, box-shadow 0.3s, opacity 1s;
     opacity:0;
   }
   .card.show{opacity:1;}
   .card:hover{
     transform:translateY(-5px);
-    box-shadow:0 15px 30px rgba(0,0,0,0.25);
+    box-shadow:0 15px 30px rgba(0,0,0,0.3);
   }
 
   .profile-pic{
@@ -59,7 +67,15 @@
   .bio::after{ content:'|'; animation: blink 0.7s infinite; }
   @keyframes blink{ 0%,50%,100%{opacity:1;} 25%,75%{opacity:0;} }
 
-  .info p{ margin:8px 0; }
+  .info p{
+    margin:8px 0;
+    padding:6px 8px;
+    border-radius:5px;
+    transition: background 0.3s;
+  }
+  .info p:hover{
+    background: rgba(0,123,255,0.1); /* subtle hover highlight */
+  }
 
   .links{ display:flex; justify-content:center; gap:15px; margin-top:15px; }
   .links a{
@@ -103,6 +119,13 @@
   }
   .project-card a { text-decoration:none; color:#007bff; font-weight:bold; }
 
+  footer{
+    margin-top:30px;
+    font-size:14px;
+    color:#555;
+    text-align:center;
+  }
+
   @media(max-width:800px){
     .cards-container{ flex-direction:column; align-items:center; }
     .projects{ flex-direction:column; align-items:center; }
@@ -126,8 +149,7 @@
       <p><strong>College:</strong> Ispahani Public School and College</p>
       <p><strong>School:</strong> Comilla Cantonment High School</p>
       <p><strong>Blood Group:</strong> B+</p>
-      <p><strong>Hobbies:</strong> Watching football ⚽, supporting Barcelona and Argentina</p>
-
+      <p><strong>Hobbies:</strong> Watching football ⚽, supporting Barcelona & Argentina</p>
       <p><strong>Languages:</strong> Bangla, English, Hindi</p>
     </div>
   </div>
@@ -186,12 +208,16 @@
 
 </div>
 
+<footer>
+  © 2025 Asaduzzaman Rony | All rights reserved.
+</footer>
+
 <script>
 document.addEventListener("DOMContentLoaded", function(){
   const phrases = [
     "Disciplined CSE student 💻",
     "Passionate about coding 🚀",
-    "Football lover ⚽ | Barca & Argentina fan"
+    "Football lover ⚽ | Barcelona & Argentina fan"
   ];
   let i=0,j=0,current='',isDeleting=false;
   const bioEl = document.getElementById('bio');
@@ -225,4 +251,3 @@ document.addEventListener("DOMContentLoaded", function(){
 
 </body>
 </html>
-
