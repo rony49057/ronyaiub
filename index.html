@@ -1,150 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>  
-  <title>RONY</title>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RONY - Portfolio</title>
 <style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f3f4f6;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+  }
+
   fieldset {
-    border: solid blue;
-    border-radius: 10px;
-    margin: 10px;
-    background-color:  whitesmoke;
-
-
-  }
-  td{
-    color :black;
-  }
-  legend {
-    font-weight: 20px;
-    color : red;
-    font-weight: bold;
-    padding: 4px 10px;
+    border: 2px solid #007bff;
+    border-radius: 15px;
+    padding: 20px;
     background-color: whitesmoke;
-    border: 2px solid blue;
-    border-radius: 5px;
-    box-shadow: aqua;
+    width: 350px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
   }
 
-  .facebook-link {
-    text-decoration: none;
-    color: red;
-    border: 2px solid blue ;
-    padding: 2px 5px ;
-    border-radius: 5px ;
+  fieldset:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  }
+
+  legend {
+    font-size: 1.2em;
     font-weight: bold;
-
-    display: inline-block;           
-    transition: all 0.3s ease;
-  }
-  .facebook-link:hover {
-    background-color: rgb(14, 220, 18);
-    color: white;
-    transform: scale(1.1);
+    color: #007bff;
+    padding: 5px 15px;
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    background-color: whitesmoke;
   }
 
   .profile-pic {
-  width: 100px;               /* size */
-  height: 100px;
-  border-radius: 50%;         /* makes it circular */
-  border: 3px solid blue;     /* border around the image */
-  box-shadow: 2px 2px 10px rgba(0,0,0,0.3);  /* shadow effect */
-  object-fit: cover;          /* crop/fit image nicely */
-  transition: transform 0.3s ease; /* hover animation */
-}
+    display: block;
+    margin: 0 auto 15px auto;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #007bff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
 
-.profile-pic:hover {
-  transform: scale(1.1);      /* zoom slightly on hover */
-}
+  .profile-pic:hover {
+    transform: scale(1.1);
+  }
 
- 
+  .info p {
+    margin: 8px 0;
+    font-weight: 500;
+  }
 
+  .bio {
+    font-style: italic;
+    font-weight: bold;  /* Bold dynamic bio */
+    color: #333;
+    min-height: 24px;
+    margin-bottom: 10px;
+  }
+
+  .links {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+  }
+
+  .links a {
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+
+  .links a:hover {
+    background-color: #28a745;
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 800px) {
+    body {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
 </style>
-
-  </head>
+</head>
 <body>
 
-  <table> 
-    <tr> 
-      <td>
-
+  <!-- Personal Information -->
   <fieldset>
-    <legend>Personal Information    </legend>
-    <table>
-      <tr>
-        <td>Name</td>
-        <td>: Asaduzzaman Rony</td>
-      </tr>
-      <tr>
-        <td>Id</td>
-        <td>: 22-49057-3</td>
-        
-      </tr>
-      <tr>
-        <td>University</td>
-        <td>: American International University-Bangladesh</td>
-      </tr>
-      <tr>
-        <td>College</td>
-        <td>: Ispahani Public School and College</td>
-      </tr>
-      <tr>
-        <td>School</td>
-        <td>: Comilla Cantonment High School</td>
-      </tr>
-      <tr>
-                
-        <td>Blood group</td>
-        <td>: B+</td>
-        <td><img src="profilepic.jpg" alt="pp" class="profile-pic"</td>
-
-      </tr>
-      
-    </table>
+    <legend>Personal Information</legend>
+    <img src="profilepic.jpg" alt="Profile Picture" class="profile-pic">
+    <div class="info">
+      <p><strong>Name:</strong> Asaduzzaman Rony</p>
+      <p><strong>DOB:</strong> 11 Dec</p>
+      <p class="bio" id="bio"></p>
+      <p><strong>University:</strong> American International University-Bangladesh</p>
+      <p><strong>College:</strong> Ispahani Public School and College</p>
+      <p><strong>School:</strong> Comilla Cantonment High School</p>
+      <p><strong>Blood Group:</strong> B+</p>
+    </div>
   </fieldset>
-      </td>
-      <td> 
 
-
-
+  <!-- Contact Information -->
   <fieldset>
     <legend>Contact Information</legend>
-    <table>
-      <tr>
-        <td>Phone</td>
-        <td>: 017*******8</td>
-      </tr>
-      <tr>
-        <td>Email</td>
-        <td>: ronyaiubcse@gmail.com</td>
-      </tr>
-      
-        <td>City</td>
-        <td>: Dhaka</td>
-      </tr>
-      <tr>
-        <td> </td>
-      </tr>
-     <tr>
-  <td colspan="3">
-    <div style="display: flex; justify-content: space-around;">
-      <a href="https://www.facebook.com/rony49057" target="_blank" class="facebook-link">Facebook</a>
-      <a href="https://www.instagram.com/rony_49057" target="_blank" class="facebook-link">Instagram</a>
-      <a href="https://github.com/rony49057" target="_blank" class="facebook-link">GitHub</a>
+    <div class="info">
+      <p><strong>Phone:</strong> 017*******8</p>
+      <p><strong>Email:</strong> ronyaiubcse@gmail.com</p>
+      <p><strong>City:</strong> Dhaka</p>
     </div>
-  </td>
-</tr>
-
-      <tr>
-    </table>
+    <div class="links">
+      <a href="https://www.facebook.com/rony49057" target="_blank">Facebook</a>
+      <a href="https://www.instagram.com/rony_49057" target="_blank">Instagram</a>
+      <a href="https://github.com/rony49057" target="_blank">GitHub</a>
+    </div>
   </fieldset>
-      </td>
-    </tr>
-  </table>
-  
+
+<script>
+  const phrases = [
+    "Passionate CSE student 💻",,
+    "Love coding & learning new tech 🚀"
+  ];
+
+  let i = 0;
+  let j = 0;
+  let currentPhrase = '';
+  let isDeleting = false;
+  const bioElement = document.getElementById('bio');
+
+  function type() {
+    const fullPhrase = phrases[i];
+    if (isDeleting) {
+      currentPhrase = fullPhrase.substring(0, j--);
+    } else {
+      currentPhrase = fullPhrase.substring(0, j++);
+    }
+    bioElement.textContent = currentPhrase;
+
+    if (!isDeleting && j === fullPhrase.length) {
+      isDeleting = true;
+      setTimeout(type, 1500);
+    } else if (isDeleting && j === 0) {
+      isDeleting = false;
+      i = (i + 1) % phrases.length;
+      setTimeout(type, 500);
+    } else {
+      setTimeout(type, isDeleting ? 50 : 100);
+    }
+  }
+
+  type();
+</script>
 
 </body>
 </html>
-
-
-
-
