@@ -15,6 +15,7 @@
     flex-direction:column;
     align-items:center;
     padding:20px;
+    transition: all 0.5s ease;
   }
 
   h1{text-align:center; margin-bottom:30px; color:#000000;}
@@ -31,10 +32,290 @@
 
   /* Card Styling with dynamic hover */
   .card{
-    background:#fff; /* white card */
+    background:#fff;
     border-radius:15px;
     box-shadow:0 10px 25px rgba(0,0,0,0.2);
     padding:25px;
+    width:350px;
+    color:#000;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease, background 0.3s ease, color 0.3s ease;
+    opacity:0;
+  }
+
+  .card.show{ opacity:1; }
+
+  .card:hover{
+    transform: scale(1.05);
+    box-shadow:0 20px 40px rgba(0,0,0,0.3);
+    border:2px solid #007bff;
+    background: linear-gradient(135deg,#ffffff,#e6f7ff);
+  }
+
+  .profile-pic{
+    display:block;
+    width:130px; height:130px;
+    border-radius:50%;
+    border:4px solid #007bff;
+    margin:0 auto 20px auto;
+    object-fit:cover;
+    transition:transform 0.3s, border 0.3s;
+  }
+  .profile-pic:hover{transform:scale(1.1);}
+
+  .bio{
+    font-weight:bold;
+    font-style:italic;
+    text-align:center;
+    color:#007bff;
+    min-height:26px;
+    margin-bottom:15px;
+  }
+  .bio::after{ content:'|'; animation: blink 0.7s infinite; }
+  @keyframes blink{ 0%,50%,100%{opacity:1;} 25%,75%{opacity:0;} }
+
+  .info p{
+    margin:8px 0;
+    padding:6px 8px;
+    border-radius:5px;
+    transition: background 0.3s;
+  }
+  .info p:hover{
+    background: rgba(0,123,255,0.1);
+  }
+
+  .links{ display:flex; justify-content:center; gap:15px; margin-top:15px; }
+  .links a{
+    text-decoration:none;
+    color:white;
+    background-color:#007bff;
+    padding:8px 14px;
+    border-radius:8px;
+    font-weight:bold;
+    transition: all 0.3s ease, box-shadow 0.3s;
+  }
+  .links a:hover{
+    background-color:#28a745;
+    transform:scale(1.1);
+    box-shadow:0 0 8px #28a745;
+  }
+
+  .skill{ margin:10px 0; }
+  .skill-name{ font-weight:bold; }
+  .skill-bar{
+    width:100%; background:#eee; border-radius:8px; overflow:hidden; margin-top:5px;
+  }
+  .skill-fill{
+    height:10px; width:0%; background:#007bff; border-radius:8px; transition: width 1.5s ease;
+  }
+
+  .projects{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:15px; margin-top:15px;
+  }
+  .project-card{
+    background:#f7f7f7;
+    width:150px;
+    padding:15px;
+    border-radius:10px;
+    text-align:center;
+    transition:transform 0.3s, box-shadow 0.3s, background 0.3s;
+  }
+  .project-card:hover{
+    transform:scale(1.05);
+    box-shadow:0 10px 20px rgba(0,0,0,0.2);
+  }
+  .project-card a { text-decoration:none; color:#007bff; font-weight:bold; }
+
+  footer{
+    margin-top:30px;
+    font-size:14px;
+    color:#555;
+    text-align:center;
+  }
+
+  @media(max-width:800px){
+    .cards-container{ flex-direction:column; align-items:center; }
+    .projects{ flex-direction:column; align-items:center; }
+  }
+
+  /* Dark mode styles */
+  body.dark-mode {
+    background: linear-gradient(135deg,#1e1e1e,#3c3c3c);
+    color: #f0f0f0;
+  }
+
+  body.dark-mode .card {
+    background: #2c2c2c;
+    color: #f0f0f0;
+    border: 1px solid #555;
+  }
+
+  body.dark-mode .card:hover {
+    background: linear-gradient(135deg,#3c3c3c,#4c4c4c);
+    border: 2px solid #00d1ff;
+  }
+
+  body.dark-mode .profile-pic {
+    border: 4px solid #00d1ff;
+  }
+
+  body.dark-mode .links a {
+    background-color: #00d1ff;
+    color: #fff;
+  }
+
+  body.dark-mode .links a:hover {
+    background-color: #28a745;
+    box-shadow:0 0 8px #28a745;
+  }
+
+  body.dark-mode .skill-fill {
+    background: #00d1ff;
+  }
+
+  /* Theme toggle icon */
+  #theme-toggle {
+    position:fixed;
+    top:20px;
+    right:20px;
+    cursor:pointer;
+    font-size:24px;
+    z-index:1000;
+    transition: transform 0.3s;
+  }
+  #theme-toggle:hover { transform: scale(1.2); }
+</style>
+</head>
+<body>
+
+<!-- Dark/Light Mode Toggle -->
+<div id="theme-toggle" title="Toggle Dark/Light Mode">🌙</div>
+
+<h1>Asaduzzaman Rony</h1>
+
+<div class="cards-container">
+
+  <!-- Personal Information Card -->
+  <div class="card" id="personal-card">
+    <h2>Personal Information</h2>
+    <img src="profilepic.jpg" alt="Profile Picture" class="profile-pic">
+    <div class="bio" id="bio"></div>
+    <div class="info">
+      <p><strong>DOB:</strong> 11 Dec</p>
+      <p><strong>University:</strong> American International University‑Bangladesh</p>
+      <p><strong>College:</strong> Ispahani Public School and College</p>
+      <p><strong>School:</strong> Comilla Cantonment High School</p>
+      <p><strong>Blood Group:</strong> B+</p>
+      <p><strong>Hobbies:</strong> Watching football ⚽, supporting Barcelona & Argentina</p>
+      <p><strong>Languages:</strong> Bangla, English, Hindi</p>
+    </div>
+  </div>
+
+  <!-- Contact Info Card -->
+  <div class="card" id="contact-card">
+    <h2>Contact Information</h2>
+    <div class="info">
+      <p><strong>Phone:</strong> 017*******8</p>
+      <p><strong>Email:</strong> ronyaiubcse@gmail.com</p>
+      <p><strong>City:</strong> Dhaka</p>
+    </div>
+    <div class="links">
+      <a href="https://www.facebook.com/rony49057" target="_blank">Facebook</a>
+      <a href="https://www.instagram.com/rony_49057" target="_blank">Instagram</a>
+      <a href="https://github.com/rony49057" target="_blank">GitHub</a>
+    </div>
+  </div>
+
+  <!-- Skills Card -->
+  <div class="card" id="skills-card">
+    <h2>Skills</h2>
+    <div class="skill">
+      <span class="skill-name">HTML / CSS</span>
+      <div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div>
+    </div>
+    <div class="skill">
+      <span class="skill-name">Java</span>
+      <div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div>
+    </div>
+    <div class="skill">
+      <span class="skill-name">C#</span>
+      <div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div>
+    </div>
+    <div class="skill">
+      <span class="skill-name">C++</span>
+      <div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div>
+    </div>
+  </div>
+
+  <!-- Projects Card -->
+  <div class="card" id="projects-card">
+    <h2>Projects</h2>
+    <div class="projects">
+      <div class="project-card">
+        <a href="https://github.com/rony49057/java-project" target="_blank">Java Project</a>
+      </div>
+      <div class="project-card">
+        <a href="https://github.com/rony49057/c-sharp-project" target="_blank">C# Project</a>
+      </div>
+      <div class="project-card">
+        <a href="https://github.com/rony49057/cg" target="_blank">C++ / CG Project</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  © 2025 Asaduzzaman Rony | All rights reserved.
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  // Bio typing animation
+  const phrases = [
+    "Disciplined CSE student 💻",
+    "Passionate about coding 🚀",
+    "Football lover ⚽ | Barcelona & Argentina fan 💙♥️🇦🇷 "
+  ];
+  let i=0,j=0,current='',isDeleting=false;
+  const bioEl = document.getElementById('bio');
+  function type(){
+    const full = phrases[i];
+    current = isDeleting ? full.substring(0,j--) : full.substring(0,j++);
+    bioEl.textContent = current;
+    if(!isDeleting && j === full.length){
+      isDeleting = true;
+      setTimeout(type,1500);
+    } else if(isDeleting && j === 0){
+      isDeleting = false;
+      i = (i+1) % phrases.length;
+      setTimeout(type,500);
+    } else {
+      setTimeout(type, isDeleting?50:100);
+    }
+  }
+  type();
+
+  // Fade in cards
+  const cards = document.querySelectorAll('.card');
+  cards.forEach((card, idx)=>{ setTimeout(()=>{card.classList.add('show');}, idx*300); });
+
+  // Animate skill bars
+  const fills = document.querySelectorAll('.skill-fill');
+  const widths = ["90%","80%","70%","65%"];
+  fills.forEach((fill, idx)=>{ setTimeout(()=>{ fill.style.width = widths[idx]; }, 1000); });
+
+  // Dark/Light Mode Toggle
+  const themeToggle = document.getElementById('theme-toggle');
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+  });
+});
+</script>
+
+</body>
+</html>
+padding:25px;
     width:350px;
     color:#000;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease, background 0.3s ease;
@@ -256,4 +537,5 @@ document.addEventListener("DOMContentLoaded", function(){
 
 </body>
 </html>
+
 
