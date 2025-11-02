@@ -3,121 +3,135 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RONY - Portfolio</title>
+<title>Asaduzzaman Rony – Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
+  * { margin:0; padding:0; box-sizing:border-box; }
   body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f3f4f6;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
+    font-family:'Roboto',sans-serif;
+    background: linear-gradient(135deg,#74ebd5,#ACB6E5);
+    color:#333;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:20px;
+  }
+  h1,h2{text-align:center; margin-bottom:15px;}
+
+  .cards-container{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:20px;
   }
 
-  fieldset {
-    border: 2px solid #007bff;
-    border-radius: 15px;
-    padding: 20px;
-    background-color: whitesmoke;
-    width: 350px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
+  .card{
+    background-color:#fff;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+    padding:25px;
+    width:350px;
+    transition:transform 0.3s, box-shadow 0.3s, opacity 1s;
+    opacity:0;
+  }
+  .card.show{opacity:1;}
+  .card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 30px rgba(0,0,0,0.25);
   }
 
-  fieldset:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  .profile-pic{
+    display:block;
+    width:130px; height:130px;
+    border-radius:50%;
+    border:4px solid #007bff;
+    margin:0 auto 20px auto;
+    object-fit:cover;
+    transition:transform 0.3s;
+  }
+  .profile-pic:hover{transform:scale(1.1);}
+
+  .bio{
+    font-weight:bold;
+    font-style:italic;
+    text-align:center;
+    color:#007bff;
+    min-height:26px;
+    margin-bottom:15px;
+  }
+  .bio::after{ content:'|'; animation: blink 0.7s infinite; }
+  @keyframes blink{ 0%,50%,100%{opacity:1;} 25%,75%{opacity:0;} }
+
+  .info p{ margin:8px 0; }
+
+  .links{ display:flex; justify-content:center; gap:15px; margin-top:15px; }
+  .links a{
+    text-decoration:none;
+    color:white;
+    background-color:#007bff;
+    padding:8px 14px;
+    border-radius:8px;
+    font-weight:bold;
+    transition: all 0.3s ease, box-shadow 0.3s;
+  }
+  .links a:hover{
+    background-color:#28a745;
+    transform:scale(1.1);
+    box-shadow:0 0 8px #28a745;
   }
 
-  legend {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #007bff;
-    padding: 5px 15px;
-    border: 2px solid #007bff;
-    border-radius: 10px;
-    background-color: whitesmoke;
+  .skill{ margin:10px 0; }
+  .skill-name{ font-weight:bold; }
+  .skill-bar{
+    width:100%; background:#eee; border-radius:8px; overflow:hidden; margin-top:5px;
+  }
+  .skill-fill{
+    height:10px; width:0%; background:#007bff; border-radius:8px; transition: width 1.5s ease;
   }
 
-  .profile-pic {
-    display: block;
-    margin: 0 auto 15px auto;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 3px solid #007bff;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    object-fit: cover;
-    transition: transform 0.3s;
+  .projects{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:15px; margin-top:15px;
   }
-
-  .profile-pic:hover {
-    transform: scale(1.1);
+  .project-card{
+    background:#f7f7f7;
+    width:150px;
+    padding:15px;
+    border-radius:10px;
+    text-align:center;
+    transition:transform 0.3s, box-shadow 0.3s;
   }
-
-  .info p {
-    margin: 8px 0;
-    font-weight: 500;
+  .project-card:hover{
+    transform:scale(1.05);
+    box-shadow:0 10px 20px rgba(0,0,0,0.2);
   }
+  .project-card a { text-decoration:none; color:#007bff; font-weight:bold; }
 
-  .bio {
-    font-style: italic;
-    font-weight: bold;  /* Bold dynamic bio */
-    color: #333;
-    min-height: 24px;
-    margin-bottom: 10px;
-  }
-
-  .links {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 10px;
-  }
-
-  .links a {
-    text-decoration: none;
-    color: white;
-    background-color: #007bff;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-  }
-
-  .links a:hover {
-    background-color: #28a745;
-    transform: scale(1.1);
-  }
-
-  @media (max-width: 800px) {
-    body {
-      flex-direction: column;
-      align-items: center;
-    }
+  @media(max-width:800px){
+    .cards-container{ flex-direction:column; align-items:center; }
+    .projects{ flex-direction:column; align-items:center; }
   }
 </style>
 </head>
 <body>
 
-  <!-- Personal Information -->
-  <fieldset>
-    <legend>Personal Information</legend>
+<h1>Asaduzzaman Rony</h1>
+
+<div class="cards-container">
+
+  <!-- Personal Information Card -->
+  <div class="card" id="personal-card">
+    <h2>Personal Information</h2>
     <img src="profilepic.jpg" alt="Profile Picture" class="profile-pic">
+    <div class="bio" id="bio"></div>
     <div class="info">
-      <p><strong>Name:</strong> Asaduzzaman Rony</p>
       <p><strong>DOB:</strong> 11 Dec</p>
-      <p class="bio" id="bio"></p>
-      <p><strong>University:</strong> American International University-Bangladesh</p>
+      <p><strong>University:</strong> American International University‑Bangladesh</p>
       <p><strong>College:</strong> Ispahani Public School and College</p>
       <p><strong>School:</strong> Comilla Cantonment High School</p>
       <p><strong>Blood Group:</strong> B+</p>
     </div>
-  </fieldset>
+  </div>
 
-  <!-- Contact Information -->
-  <fieldset>
-    <legend>Contact Information</legend>
+  <!-- Contact Info Card -->
+  <div class="card" id="contact-card">
+    <h2>Contact Information</h2>
     <div class="info">
       <p><strong>Phone:</strong> 017*******8</p>
       <p><strong>Email:</strong> ronyaiubcse@gmail.com</p>
@@ -128,44 +142,81 @@
       <a href="https://www.instagram.com/rony_49057" target="_blank">Instagram</a>
       <a href="https://github.com/rony49057" target="_blank">GitHub</a>
     </div>
-  </fieldset>
+  </div>
+
+  <!-- Skills Card -->
+  <div class="card" id="skills-card">
+    <h2>Skills</h2>
+    <div class="skill">
+      <span class="skill-name">HTML / CSS</span>
+      <div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div>
+    </div>
+    <div class="skill">
+      <span class="skill-name">Java</span>
+      <div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div>
+    </div>
+    <div class="skill">
+      <span class="skill-name">C#</span>
+      <div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div>
+    </div>
+    <div class="skill">
+      <span class="skill-name">C++</span>
+      <div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div>
+    </div>
+  </div>
+
+  <!-- Projects Card -->
+  <div class="card" id="projects-card">
+    <h2>Projects</h2>
+    <div class="projects">
+      <div class="project-card">
+        <a href="https://github.com/rony49057/java-project" target="_blank">Java Project</a>
+      </div>
+      <div class="project-card">
+        <a href="https://github.com/rony49057/c-sharp-project" target="_blank">C# Project</a>
+      </div>
+      <div class="project-card">
+        <a href="https://github.com/rony49057/cg" target="_blank">C++ / CG Project</a>
+      </div>
+    </div>
+  </div>
+
+</div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function(){
   const phrases = [
     "Passionate CSE student 💻",
     "Disciplined and hardworking 🎯",
     "Love coding & learning new tech 🚀"
   ];
-
-  let i = 0;
-  let j = 0;
-  let currentPhrase = '';
-  let isDeleting = false;
-  const bioElement = document.getElementById('bio');
-
-  function type() {
-    const fullPhrase = phrases[i];
-    if (isDeleting) {
-      currentPhrase = fullPhrase.substring(0, j--);
-    } else {
-      currentPhrase = fullPhrase.substring(0, j++);
-    }
-    bioElement.textContent = currentPhrase;
-
-    if (!isDeleting && j === fullPhrase.length) {
+  let i=0, j=0, current='', isDeleting=false;
+  const bioEl = document.getElementById('bio');
+  function type(){
+    const full = phrases[i];
+    current = isDeleting ? full.substring(0, j--) : full.substring(0, j++);
+    bioEl.textContent = current;
+    if(!isDeleting && j === full.length){
       isDeleting = true;
-      setTimeout(type, 1500);
-    } else if (isDeleting && j === 0) {
+      setTimeout(type,1500);
+    } else if(isDeleting && j === 0){
       isDeleting = false;
-      i = (i + 1) % phrases.length;
-      setTimeout(type, 500);
+      i = (i+1) % phrases.length;
+      setTimeout(type,500);
     } else {
-      setTimeout(type, isDeleting ? 50 : 100);
+      setTimeout(type, isDeleting?50:100);
     }
   }
-
   type();
+
+  // Fade in cards
+  const cards = document.querySelectorAll('.card');
+  cards.forEach((card, idx)=>{ setTimeout(()=>{card.classList.add('show');}, idx*300); });
+
+  // Animate skill bars
+  const fills = document.querySelectorAll('.skill-fill');
+  const widths = ["90%","75%","60%","65%"];
+  fills.forEach((fill, idx)=>{ setTimeout(()=>{ fill.style.width = widths[idx]; }, 1000); });
 });
 </script>
 
