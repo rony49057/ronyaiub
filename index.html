@@ -4,6 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Asaduzzaman Rony - Portfolio</title>
+
+<!-- Open Graph for link previews (no description) -->
+<meta property="og:title" content="Asaduzzaman Rony - Portfolio">
+<meta property="og:image" content="https://yourwebsite.com/profilepic.jpg">
+<meta property="og:url" content="https://yourwebsite.com">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Asaduzzaman Rony - Portfolio">
+<meta name="twitter:image" content="https://yourwebsite.com/profilepic.jpg">
+
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -32,18 +44,9 @@ body {
 }
 
 h1{text-align:center; margin-bottom:30px; color:#000000; transition: color 0.5s;}
-h2{
-  text-align:center;
-  margin-bottom:15px;
-  color:#007bff;
-  padding:5px 0;
-}
+h2{text-align:center; margin-bottom:15px; color:#007bff; padding:5px 0;}
 
-.cards-container{
-  display:flex; flex-wrap:wrap; justify-content:center; gap:20px;
-}
-
-/* Card Styling with scroll animation */
+.cards-container{ display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
 .card{
   background:#fff;
   border-radius:15px;
@@ -55,10 +58,7 @@ h2{
   transform: translateY(50px);
   transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s ease, border 0.3s ease, background 0.3s ease;
 }
-.card.show{
-  opacity:1;
-  transform: translateY(0);
-}
+.card.show{ opacity:1; transform: translateY(0); }
 .card:hover{
   transform: scale(1.05);
   box-shadow:0 20px 40px rgba(0,0,0,0.3);
@@ -66,148 +66,55 @@ h2{
   background: linear-gradient(135deg,#ffffff,#e6f7ff);
 }
 
-.bio{
-  font-weight:bold;
-  font-style:italic;
-  text-align:center;
-  color:#007bff;
-  min-height:26px;
-  margin-bottom:15px;
-}
+.bio{ font-weight:bold; font-style:italic; text-align:center; color:#007bff; min-height:26px; margin-bottom:15px;}
 .bio::after{ content:'|'; animation: blink 0.7s infinite; }
 @keyframes blink{ 0%,50%,100%{opacity:1;} 25%,75%{opacity:0;} }
 
-.info p{
-  margin:8px 0;
-  padding:6px 8px;
-  border-radius:5px;
-  transition: background 0.3s;
-}
+.info p{ margin:8px 0; padding:6px 8px; border-radius:5px; transition: background 0.3s; }
 .info p:hover{ background: rgba(0,123,255,0.1); }
 
 .links{ display:flex; justify-content:center; gap:15px; margin-top:15px; }
-.links a{
-  text-decoration:none;
-  color:white;
-  background-color:#007bff;
-  padding:8px 14px;
-  border-radius:8px;
-  font-weight:bold;
-  transition: all 0.3s ease, box-shadow 0.3s;
-}
-.links a:hover{
-  background-color:#28a745;
-  transform:scale(1.1);
-  box-shadow:0 0 8px #28a745;
-}
+.links a{ text-decoration:none; color:white; background-color:#007bff; padding:8px 14px; border-radius:8px; font-weight:bold; transition: all 0.3s ease, box-shadow 0.3s; }
+.links a:hover{ background-color:#28a745; transform:scale(1.1); box-shadow:0 0 8px #28a745; }
 
 .skill{ margin:10px 0; }
 .skill-name{ font-weight:bold; }
-.skill-bar{
-  width:100%; background:#eee; border-radius:8px; overflow:hidden; margin-top:5px;
-}
-.skill-fill{
-  height:10px; width:0%; background:#007bff; border-radius:8px; transition: width 1.5s ease;
-}
+.skill-bar{ width:100%; background:#eee; border-radius:8px; overflow:hidden; margin-top:5px; }
+.skill-fill{ height:10px; width:0%; background:#007bff; border-radius:8px; transition: width 1.5s ease; }
 
-.projects{
-  display:flex; flex-wrap:wrap; justify-content:center; gap:15px; margin-top:15px;
-}
-
-/* Project Card with dynamic gradient border effect */
+.projects{ display:flex; flex-wrap:wrap; justify-content:center; gap:15px; margin-top:15px; }
 .project-card {
-  background:#f7f7f7;
-  width:150px;
-  padding:15px;
-  border-radius:10px;
-  text-align:center;
-  position: relative;
-  overflow: hidden;
-  border:2px solid transparent;
-  transition: transform 0.3s, box-shadow 0.3s;
+  background:#f7f7f7; width:150px; padding:15px; border-radius:10px; text-align:center; position: relative; overflow: hidden; border:2px solid transparent; transition: transform 0.3s, box-shadow 0.3s;
 }
-.project-card::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, #007bff, #28a745, #ff9800, #ff4081);
-  background-size: 400% 400%;
-  filter: blur(10px);
-  opacity: 0;
-  transition: opacity 0.3s;
-  border-radius: 12px;
-  z-index: 0;
-  animation: gradientMove 8s linear infinite;
+.project-card::before{
+  content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+  background: linear-gradient(45deg, #007bff, #28a745, #ff9800, #ff4081); background-size: 400% 400%;
+  filter: blur(10px); opacity: 0; transition: opacity 0.3s; border-radius: 12px; z-index:0; animation: gradientMove 8s linear infinite;
 }
-@keyframes gradientMove {
-  0%{background-position:0% 0%;}
-  50%{background-position:100% 100%;}
-  100%{background-position:0% 0%;}
-}
-.project-card:hover::before { opacity: 1; }
-.project-card a {
-  position: relative;
-  z-index: 1;
-  text-decoration: none;
-  color: #007bff;
-  font-weight: bold;
-  transition: color 0.3s;
-}
-.project-card:hover a { color: #fff; }
-.project-card:hover { transform: scale(1.05); box-shadow:0 10px 20px rgba(0,0,0,0.3); }
+@keyframes gradientMove{ 0%{background-position:0% 0%;} 50%{background-position:100% 100%;} 100%{background-position:0% 0%;} }
+.project-card:hover::before{ opacity:1; }
+.project-card a{ position: relative; z-index:1; text-decoration: none; color:#007bff; font-weight:bold; transition: color 0.3s; }
+.project-card:hover a{ color:#fff; }
+.project-card:hover{ transform: scale(1.05); box-shadow:0 10px 20px rgba(0,0,0,0.3); }
 
-footer{
-  margin-top:30px;
-  font-size:14px;
-  text-align:center;
-  color:#fff;
-  padding:10px 0;
-  width:100%;
-  border-radius:10px;
-  background: linear-gradient(270deg, #007bff, #28a745, #ff9800, #ff4081);
-  background-size: 800% 800%;
-  animation: footerBG 15s ease infinite;
-}
-@keyframes footerBG {
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
-}
+footer{ margin-top:30px; font-size:14px; text-align:center; color:#fff; padding:10px 0; width:100%; border-radius:10px; background: linear-gradient(270deg, #007bff, #28a745, #ff9800, #ff4081); background-size: 800% 800%; animation: footerBG 15s ease infinite; }
+@keyframes footerBG{ 0%{background-position:0% 50%;} 50%{background-position:100% 50%;} 100%{background-position:0% 50%;} }
 
-@media(max-width:800px){
-  .cards-container{ flex-direction:column; align-items:center; }
-  .projects{ flex-direction:column; align-items:center; }
-}
+@media(max-width:800px){ .cards-container{ flex-direction:column; align-items:center; } .projects{ flex-direction:column; align-items:center; } }
 
 /* Dark mode */
-body.dark-mode {
-  background: #000000;
-  color: #f0f0f0;
-}
-body.dark-mode h1 { color: #ffffff; }
+body.dark-mode { background: #000000; color: #f0f0f0; }
+body.dark-mode h1 { color:#fff; }
 body.dark-mode .card { background:#000000; color:#fff; border: 1px solid #333; }
-body.dark-mode .card:hover { background: #000000; border: 2px solid #00d1ff; }
+body.dark-mode .card:hover { background:#000000; border:2px solid #00d1ff; }
 body.dark-mode .skill-fill { background:#00d1ff; }
 body.dark-mode .links a { background:#00d1ff; }
 body.dark-mode .links a:hover { background:#28a745; }
 
-/* Dark mode icon responsive */
-#theme-toggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-  font-size: 22px;
-  z-index: 1000;
-  transition: transform 0.3s;
-}
+#theme-toggle { position: fixed; top: 20px; right: 20px; cursor:pointer; font-size:22px; z-index:1000; transition: transform 0.3s; }
 #theme-toggle:hover { transform: rotate(25deg) scale(1.1); }
-@media(max-width:500px){
-  #theme-toggle { top:10px; right:10px; font-size:18px; }
-}
+@media(max-width:500px){ #theme-toggle { top:10px; right:10px; font-size:18px; } }
+
 </style>
 </head>
 <body>
@@ -275,57 +182,59 @@ body.dark-mode .links a:hover { background:#28a745; }
   <div class="card" id="projects-card">
     <h2>Projects</h2>
     <div class="projects">
-      <div class="project-card">
-        <a href="https://github.com/rony49057/java-project" target="_blank">Java Project</a>
-      </div>
-      <div class="project-card">
-        <a href="https://github.com/rony49057/c-sharp-project" target="_blank">C# Project</a>
-      </div>
-      <div class="project-card">
-        <a href="https://github.com/rony49057/cg" target="_blank">C++ / CG Project</a>
-      </div>
+      <div class="project-card"><a href="https://github.com/rony49057/java-project" target="_blank">Java Project</a></div>
+      <div class="project-card"><a href="https://github.com/rony49057/c-sharp-project" target="_blank">C# Project</a></div>
+      <div class="project-card"><a href="https://github.com/rony49057/cg" target="_blank">C++ / CG Project</a></div>
     </div>
   </div>
 
 </div>
 
-<footer>© 2025 Asaduzzaman Rony | All rights reserved.</footer>
+<footer>
+  © 2025 Asaduzzaman Rony | All rights reserved.
+</footer>
 
 <script>
 document.addEventListener("DOMContentLoaded", function(){
-  // Bio typing
-  const phrases = ["Disciplined CSE student 💻","Passionate about coding 🚀","Football lover ⚽ | Barcelona & Argentina fan 💙♥️🇦🇷 "];
-  let i=0,j=0,isDeleting=false,current='';
+  const phrases = [
+    "Disciplined CSE student 💻",
+    "Passionate about coding 🚀",
+    "Football lover ⚽ | Barcelona & Argentina fan 💙♥️🇦🇷"
+  ];
+  let i=0,j=0,current='',isDeleting=false;
   const bioEl = document.getElementById('bio');
   function type(){
     const full = phrases[i];
     current = isDeleting ? full.substring(0,j--) : full.substring(0,j++);
     bioEl.textContent = current;
-    if(!isDeleting && j===full.length){ isDeleting=true; setTimeout(type,1500); }
-    else if(isDeleting && j===0){ isDeleting=false; i=(i+1)%phrases.length; setTimeout(type,500);}
-    else { setTimeout(type,isDeleting?50:100);}
+    if(!isDeleting && j === full.length){
+      isDeleting = true;
+      setTimeout(type,1500);
+    } else if(isDeleting && j === 0){
+      isDeleting = false;
+      i = (i+1) % phrases.length;
+      setTimeout(type,500);
+    } else {
+      setTimeout(type, isDeleting?50:100);
+    }
   }
   type();
 
-  // Skill bars
+  // Fade in cards
+  const cards = document.querySelectorAll('.card');
+  cards.forEach((card, idx)=>{ setTimeout(()=>{card.classList.add('show');}, idx*300); });
+
+  // Animate skill bars
   const fills = document.querySelectorAll('.skill-fill');
   const widths = ["90%","80%","70%","65%"];
-  fills.forEach((fill, idx)=>{ setTimeout(()=>{ fill.style.width=widths[idx]; },1000); });
+  fills.forEach((fill, idx)=>{ setTimeout(()=>{ fill.style.width = widths[idx]; }, 1000); });
 
   // Dark mode toggle
-  const themeToggle = document.getElementById('theme-toggle');
-  themeToggle.addEventListener('click',()=>{
+  const toggle = document.getElementById('theme-toggle');
+  toggle.addEventListener('click', function(){
     document.body.classList.toggle('dark-mode');
-    themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+    toggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
   });
-
-  // Intersection Observer for scroll animation
-  const observer = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){ entry.target.classList.add('show'); observer.unobserve(entry.target); }
-    });
-  }, { threshold:0.2 });
-  document.querySelectorAll('.card').forEach(card=>observer.observe(card));
 });
 </script>
 
