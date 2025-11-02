@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Asaduzzaman Rony – Portfolio</title>
+<title>Asaduzzaman Rony - Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -126,6 +126,8 @@
       <p><strong>College:</strong> Ispahani Public School and College</p>
       <p><strong>School:</strong> Comilla Cantonment High School</p>
       <p><strong>Blood Group:</strong> B+</p>
+      <p><strong>Hobbies:</strong> Watching football ⚽, Barca & Argentina fan</p>
+      <p><strong>Languages:</strong> Bangla, English, Hindi</p>
     </div>
   </div>
 
@@ -186,15 +188,15 @@
 <script>
 document.addEventListener("DOMContentLoaded", function(){
   const phrases = [
-    "Passionate CSE student 💻",
-    "Disciplined and hardworking 🎯",
-    "Love coding & learning new tech 🚀"
+    "Disciplined CSE student 💻",
+    "Passionate about coding 🚀",
+    "Football lover ⚽ | Barca & Argentina fan"
   ];
-  let i=0, j=0, current='', isDeleting=false;
+  let i=0,j=0,current='',isDeleting=false;
   const bioEl = document.getElementById('bio');
   function type(){
     const full = phrases[i];
-    current = isDeleting ? full.substring(0, j--) : full.substring(0, j++);
+    current = isDeleting ? full.substring(0,j--) : full.substring(0,j++);
     bioEl.textContent = current;
     if(!isDeleting && j === full.length){
       isDeleting = true;
@@ -215,7 +217,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
   // Animate skill bars
   const fills = document.querySelectorAll('.skill-fill');
-  const widths = ["90%","75%","60%","65%"];
+  const widths = ["90%","80%","70%","65%"];
   fills.forEach((fill, idx)=>{ setTimeout(()=>{ fill.style.width = widths[idx]; }, 1000); });
 });
 </script>
