@@ -41,6 +41,21 @@
     color: white;
     transform: scale(1.1);
   }
+
+  .profile-pic {
+  width: 100px;               /* size */
+  height: 100px;
+  border-radius: 50%;         /* makes it circular */
+  border: 3px solid blue;     /* border around the image */
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.3);  /* shadow effect */
+  object-fit: cover;          /* crop/fit image nicely */
+  transition: transform 0.3s ease; /* hover animation */
+}
+
+.profile-pic:hover {
+  transform: scale(1.1);      /* zoom slightly on hover */
+}
+
  
 
 </style>
@@ -80,7 +95,7 @@
                 
         <td>Blood group</td>
         <td>: B+</td>
-        <td><img src="profilepic.jpg" alt="pp" width="100" height="100"></td>
+        <td><img src="profilepic.jpg" alt="pp" class="profile-pic"</td>
 
       </tr>
       
@@ -109,11 +124,16 @@
       <tr>
         <td> </td>
       </tr>
-      <tr>
-        <td> <a href="https://www.facebook.com/rony49057" target="_blank" class="facebook-link">Facebook</a></td>
-        <td><a href="https://www.instagram.com/rony_49057" target="_blank"  class="facebook-link">Instagram</a></td>
-       <td><a href="https://github.com/rony49057" target="_blank"  class="facebook-link">Git Hub</a></td>
-      </tr>
+     <tr>
+  <td colspan="3">
+    <div style="display: flex; justify-content: space-around;">
+      <a href="https://www.facebook.com/rony49057" target="_blank" class="facebook-link">Facebook</a>
+      <a href="https://www.instagram.com/rony_49057" target="_blank" class="facebook-link">Instagram</a>
+      <a href="https://github.com/rony49057" target="_blank" class="facebook-link">GitHub</a>
+    </div>
+  </td>
+</tr>
+
       <tr>
     </table>
   </fieldset>
@@ -124,6 +144,7 @@
 
 </body>
 </html>
+
 
 
 
