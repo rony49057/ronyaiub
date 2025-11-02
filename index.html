@@ -5,66 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Asaduzzaman Rony - Portfolio</title>
 
-<!-- Open Graph for link previews (no description) -->
+<!-- Open Graph for link previews -->
 <meta property="og:title" content="Asaduzzaman Rony - Portfolio">
-<meta property="og:image" content="https://yourwebsite.com/profilepic.jpg">
-<meta property="og:url" content="https://yourwebsite.com">
+<meta property="og:image" content="https://rony49057.github.io/ronyaiub/profilepic.jpg">
+<meta property="og:url" content="https://rony49057.github.io/ronyaiub/">
 <meta property="og:type" content="website">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Asaduzzaman Rony - Portfolio">
-<meta name="twitter:image" content="https://yourwebsite.com/profilepic.jpg">
+<meta name="twitter:image" content="https://rony49057.github.io/ronyaiub/profilepic.jpg">
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
-body {
-  font-family:'Roboto',sans-serif;
-  background: linear-gradient(135deg,#74ebd5,#ACB6E5);
-  color:#333;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding:20px;
-  transition: background 0.5s, color 0.5s;
-}
+body { font-family:'Roboto',sans-serif; background: linear-gradient(135deg,#74ebd5,#ACB6E5); color:#333; display:flex; flex-direction:column; align-items:center; padding:20px; transition: background 0.5s, color 0.5s; }
 
-.profile-pic-top{
-  display:block;
-  width:150px; height:150px;
-  border-radius:50%;
-  border:4px solid #007bff;
-  margin:0 auto 15px auto;
-  object-fit:cover;
-  transition: transform 0.3s;
-}
-.profile-pic-top:hover{
-  transform:scale(1.1);
-}
+.profile-pic-top{ display:block; width:150px; height:150px; border-radius:50%; border:4px solid #007bff; margin:0 auto 15px auto; object-fit:cover; transition: transform 0.3s; }
+.profile-pic-top:hover{ transform:scale(1.1); }
 
 h1{text-align:center; margin-bottom:30px; color:#000000; transition: color 0.5s;}
 h2{text-align:center; margin-bottom:15px; color:#007bff; padding:5px 0;}
 
 .cards-container{ display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
-.card{
-  background:#fff;
-  border-radius:15px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.2);
-  padding:25px;
-  width:350px;
-  color:#000;
-  opacity:0;
-  transform: translateY(50px);
-  transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s ease, border 0.3s ease, background 0.3s ease;
-}
+.card{ background:#fff; border-radius:15px; box-shadow:0 10px 25px rgba(0,0,0,0.2); padding:25px; width:350px; color:#000; opacity:0; transform: translateY(50px); transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s ease, border 0.3s ease, background 0.3s ease; }
 .card.show{ opacity:1; transform: translateY(0); }
-.card:hover{
-  transform: scale(1.05);
-  box-shadow:0 20px 40px rgba(0,0,0,0.3);
-  border:2px solid #007bff;
-  background: linear-gradient(135deg,#ffffff,#e6f7ff);
-}
+.card:hover{ transform: scale(1.05); box-shadow:0 20px 40px rgba(0,0,0,0.3); border:2px solid #007bff; background: linear-gradient(135deg,#ffffff,#e6f7ff); }
 
 .bio{ font-weight:bold; font-style:italic; text-align:center; color:#007bff; min-height:26px; margin-bottom:15px;}
 .bio::after{ content:'|'; animation: blink 0.7s infinite; }
@@ -83,14 +49,8 @@ h2{text-align:center; margin-bottom:15px; color:#007bff; padding:5px 0;}
 .skill-fill{ height:10px; width:0%; background:#007bff; border-radius:8px; transition: width 1.5s ease; }
 
 .projects{ display:flex; flex-wrap:wrap; justify-content:center; gap:15px; margin-top:15px; }
-.project-card {
-  background:#f7f7f7; width:150px; padding:15px; border-radius:10px; text-align:center; position: relative; overflow: hidden; border:2px solid transparent; transition: transform 0.3s, box-shadow 0.3s;
-}
-.project-card::before{
-  content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-  background: linear-gradient(45deg, #007bff, #28a745, #ff9800, #ff4081); background-size: 400% 400%;
-  filter: blur(10px); opacity: 0; transition: opacity 0.3s; border-radius: 12px; z-index:0; animation: gradientMove 8s linear infinite;
-}
+.project-card { background:#f7f7f7; width:150px; padding:15px; border-radius:10px; text-align:center; position: relative; overflow: hidden; border:2px solid transparent; transition: transform 0.3s, box-shadow 0.3s; }
+.project-card::before{ content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, #007bff, #28a745, #ff9800, #ff4081); background-size: 400% 400%; filter: blur(10px); opacity: 0; transition: opacity 0.3s; border-radius: 12px; z-index:0; animation: gradientMove 8s linear infinite; }
 @keyframes gradientMove{ 0%{background-position:0% 0%;} 50%{background-position:100% 100%;} 100%{background-position:0% 0%;} }
 .project-card:hover::before{ opacity:1; }
 .project-card a{ position: relative; z-index:1; text-decoration: none; color:#007bff; font-weight:bold; transition: color 0.3s; }
@@ -121,120 +81,104 @@ body.dark-mode .links a:hover { background:#28a745; }
 
 <div id="theme-toggle" title="Toggle Dark/Light Mode">🌙</div>
 
-<!-- Profile Picture on top -->
-<img src="profilepic.jpg" alt="Profile Picture" class="profile-pic-top">
+<img src="https://rony49057.github.io/ronyaiub/profilepic.jpg" alt="Profile Picture" class="profile-pic-top">
 <h1>Asaduzzaman Rony</h1>
 
 <div class="cards-container">
 
-  <!-- Personal Info -->
-  <div class="card" id="personal-card">
-    <h2>Personal Information</h2>
-    <div class="bio" id="bio"></div>
-    <div class="info">
-      <p><strong>DOB:</strong> 11 Dec</p>
-      <p><strong>University:</strong><br><b>American International University-Bangladesh</b><br>BSc in Computer Science and Engineering</p>
-      <p><strong>College:</strong><br><b>Ispahani Public School and College</b><br>Completed in 2019</p>
-      <p><strong>School:</strong><br><b>Comilla Cantonment High School</b><br>Completed in 2017</p>
-      <p><strong>Blood Group:</strong> B+</p>
-      <p><strong>Hobbies:</strong> Watching football ⚽, supporting Barcelona & Argentina</p>
-      <p><strong>Languages:</strong> Bangla, English, Hindi</p>
-    </div>
-  </div>
+<!-- Personal Information -->
+<div class="card" id="personal-card">
+<h2>Personal Information</h2>
+<div class="bio" id="bio"></div>
+<div class="info">
+<p><strong>DOB:</strong> 11 Dec</p>
+<p><strong>University:</strong><br><b>American International University-Bangladesh</b><br>BSc in Computer Science and Engineering</p>
+<p><strong>College:</strong><br><b>Ispahani Public School and College</b><br>Completed in 2019</p>
+<p><strong>School:</strong><br><b>Comilla Cantonment High School</b><br>Completed in 2017</p>
+<p><strong>Blood Group:</strong> B+</p>
+<p><strong>Hobbies:</strong> Watching football ⚽, supporting Barcelona & Argentina</p>
+<p><strong>Languages:</strong> Bangla, English, Hindi</p>
+</div>
+</div>
 
-  <!-- Contact Info -->
-  <div class="card" id="contact-card">
-    <h2>Contact Information</h2>
-    <div class="info">
-      <p><strong>Phone:</strong> 017*******8</p>
-      <p><strong>Email:</strong> ronyaiubcse@gmail.com</p>
-      <p><strong>City:</strong> Dhaka</p>
-    </div>
-    <div class="links">
-      <a href="https://www.facebook.com/rony49057" target="_blank">Facebook</a>
-      <a href="https://www.instagram.com/rony_49057" target="_blank">Instagram</a>
-      <a href="https://github.com/rony49057" target="_blank">GitHub</a>
-    </div>
-  </div>
+<!-- Contact Info -->
+<div class="card" id="contact-card">
+<h2>Contact Information</h2>
+<div class="info">
+<p><strong>Phone:</strong> 017*******8</p>
+<p><strong>Email:</strong> ronyaiubcse@gmail.com</p>
+<p><strong>City:</strong> Dhaka</p>
+</div>
+<div class="links">
+<a href="https://www.facebook.com/rony49057" target="_blank">Facebook</a>
+<a href="https://www.instagram.com/rony_49057" target="_blank">Instagram</a>
+<a href="https://github.com/rony49057" target="_blank">GitHub</a>
+</div>
+</div>
 
-  <!-- Skills -->
-  <div class="card" id="skills-card">
-    <h2>Skills</h2>
-    <div class="skill">
-      <span class="skill-name">HTML / CSS</span>
-      <div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div>
-    </div>
-    <div class="skill">
-      <span class="skill-name">Java</span>
-      <div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div>
-    </div>
-    <div class="skill">
-      <span class="skill-name">C#</span>
-      <div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div>
-    </div>
-    <div class="skill">
-      <span class="skill-name">C++</span>
-      <div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div>
-    </div>
-  </div>
+<!-- Skills -->
+<div class="card" id="skills-card">
+<h2>Skills</h2>
+<div class="skill">
+<span class="skill-name">HTML / CSS</span>
+<div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div>
+</div>
+<div class="skill">
+<span class="skill-name">Java</span>
+<div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div>
+</div>
+<div class="skill">
+<span class="skill-name">C#</span>
+<div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div>
+</div>
+<div class="skill">
+<span class="skill-name">C++</span>
+<div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div>
+</div>
+</div>
 
-  <!-- Projects -->
-  <div class="card" id="projects-card">
-    <h2>Projects</h2>
-    <div class="projects">
-      <div class="project-card"><a href="https://github.com/rony49057/java-project" target="_blank">Java Project</a></div>
-      <div class="project-card"><a href="https://github.com/rony49057/c-sharp-project" target="_blank">C# Project</a></div>
-      <div class="project-card"><a href="https://github.com/rony49057/cg" target="_blank">C++ / CG Project</a></div>
-    </div>
-  </div>
+<!-- Projects -->
+<div class="card" id="projects-card">
+<h2>Projects</h2>
+<div class="projects">
+<div class="project-card"><a href="https://github.com/rony49057/java-project" target="_blank">Java Project</a></div>
+<div class="project-card"><a href="https://github.com/rony49057/c-sharp-project" target="_blank">C# Project</a></div>
+<div class="project-card"><a href="https://github.com/rony49057/cg" target="_blank">C++ / CG Project</a></div>
+</div>
+</div>
 
 </div>
 
 <footer>
-  © 2025 Asaduzzaman Rony | All rights reserved.
+© 2025 Asaduzzaman Rony | All rights reserved.
 </footer>
 
 <script>
 document.addEventListener("DOMContentLoaded", function(){
-  const phrases = [
-    "Disciplined CSE student 💻",
-    "Passionate about coding 🚀",
-    "Football lover ⚽ | Barcelona & Argentina fan 💙♥️🇦🇷"
-  ];
-  let i=0,j=0,current='',isDeleting=false;
-  const bioEl = document.getElementById('bio');
-  function type(){
-    const full = phrases[i];
-    current = isDeleting ? full.substring(0,j--) : full.substring(0,j++);
-    bioEl.textContent = current;
-    if(!isDeleting && j === full.length){
-      isDeleting = true;
-      setTimeout(type,1500);
-    } else if(isDeleting && j === 0){
-      isDeleting = false;
-      i = (i+1) % phrases.length;
-      setTimeout(type,500);
-    } else {
-      setTimeout(type, isDeleting?50:100);
-    }
-  }
-  type();
+const phrases = ["Disciplined CSE student 💻","Passionate about coding 🚀","Football lover ⚽ | Barcelona & Argentina fan 💙♥️🇦🇷"];
+let i=0,j=0,current='',isDeleting=false;
+const bioEl = document.getElementById('bio');
+function type(){
+const full = phrases[i];
+current = isDeleting ? full.substring(0,j--) : full.substring(0,j++);
+bioEl.textContent = current;
+if(!isDeleting && j === full.length){ isDeleting=true; setTimeout(type,1500); }
+else if(isDeleting && j===0){ isDeleting=false; i=(i+1)%phrases.length; setTimeout(type,500);}
+else{ setTimeout(type,isDeleting?50:100); }}
+type();
 
-  // Fade in cards
-  const cards = document.querySelectorAll('.card');
-  cards.forEach((card, idx)=>{ setTimeout(()=>{card.classList.add('show');}, idx*300); });
+const cards=document.querySelectorAll('.card');
+cards.forEach((card, idx)=>{ setTimeout(()=>{card.classList.add('show');}, idx*300); });
 
-  // Animate skill bars
-  const fills = document.querySelectorAll('.skill-fill');
-  const widths = ["90%","80%","70%","65%"];
-  fills.forEach((fill, idx)=>{ setTimeout(()=>{ fill.style.width = widths[idx]; }, 1000); });
+const fills=document.querySelectorAll('.skill-fill');
+const widths=["90%","80%","70%","65%"];
+fills.forEach((fill, idx)=>{ setTimeout(()=>{ fill.style.width=widths[idx];}, 1000); });
 
-  // Dark mode toggle
-  const toggle = document.getElementById('theme-toggle');
-  toggle.addEventListener('click', function(){
-    document.body.classList.toggle('dark-mode');
-    toggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
-  });
+const toggle=document.getElementById('theme-toggle');
+toggle.addEventListener('click', function(){
+document.body.classList.toggle('dark-mode');
+toggle.textContent=document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+});
 });
 </script>
 
