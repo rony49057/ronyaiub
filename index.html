@@ -219,7 +219,7 @@ body {
   overflow:hidden;
   border: 2px solid; /* set border */
   border-image-slice: 1;
-  border-width: 2px;
+  border-width: 5px;
   ;
   border-image-source: linear-gradient(45deg, #00a6ff, #28a745, #ff9800, #ff4081);
   border-image-repeat: round;
@@ -228,11 +228,11 @@ body {
 }
 
 @keyframes borderGradient {
-  0% { border-image-source: linear-gradient(45deg, #00a6ff, #28a745, #ff9800, #ff4081); }
-  25% { border-image-source: linear-gradient(45deg, #28a745, #ff9800, #ff4081, #00a6ff); }
-  50% { border-image-source: linear-gradient(45deg, #ff9800, #ff4081, #00a6ff, #28a745); }
-  75% { border-image-source: linear-gradient(45deg, #ff4081, #00a6ff, #28a745, #ff9800); }
-  100% { border-image-source: linear-gradient(45deg, #00a6ff, #28a745, #ff9800, #ff4081); }
+  0% { border-image-source: linear-gradient(45deg, #00a6ff, #28a745,  #ff4081); }
+  25% { border-image-source: linear-gradient(45deg, #28a745,  #ff4081, #00a6ff); }
+  50% { border-image-source: linear-gradient(45deg,  #ff4081, #00a6ff, #28a745); }
+  75% { border-image-source: linear-gradient(45deg, #ff4081, #00a6ff, #28a745); }
+  100% { border-image-source: linear-gradient(45deg, #00a6ff, #28a745, #ff4081); }
 }
 
 .project-card::before {
@@ -241,7 +241,7 @@ body {
   top:-50%; left:-50%;
   width:200%; height:200%;
   border-radius: 10px;
-  background:linear-gradient(45deg,#00a6ffd7,#28a745,#ff9800,#ff4081);
+  background:linear-gradient(45deg,#00a6ffd7,#28a745,#ff4081);
   background-size:400% 400%;
   filter: blur(10px);
   opacity:0;
@@ -271,7 +271,7 @@ footer {
   padding:10px 0;
   width:100%;
   border-radius:10px;
-  background: linear-gradient(270deg,#00a6ffd7,#28a745,#ff9800,#ff4081);
+  background: linear-gradient(270deg,#00a6ffd7,#28a745,#ff4081);
   background-size:800% 800%;
   animation: footerBG 15s ease infinite;
 }
@@ -354,6 +354,38 @@ body.dark-mode #projects-card .project-card a {
 body.dark-mode #projects-card .project-card:hover a {
   color: #fff; /* Ensure hover keeps white */
 }
+
+#clock-card {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+#clock-card .clock-container {
+  padding: 20px;
+  position: relative;
+}
+
+#clock-card .emoji {
+  position: absolute;
+  font-size: 40px;
+  opacity: 0.9;
+  transition: transform 0.5s ease;
+}
+
+#clock-card .time-emoji { top: 10%; left: 5%; }
+#clock-card .weather-emoji { top: 10%; right: 5%; }
+
+#clock-card .time { font-size: 36px; color: #00a6ffd7; font-weight: bold; margin-top: 30px; }
+#clock-card .date { font-size: 18px; color: #333; margin-top: 5px; }
+#clock-card .day { font-size: 16px; color: #555; margin-top: 5px; }
+#clock-card .temp { font-size: 18px; color: #00a6ffd7; margin-top: 8px; }
+
+/* Dark mode adaptation */
+body.dark-mode #clock-card .time,
+body.dark-mode #clock-card .temp { color: #00a6ffd7; }
+body.dark-mode #clock-card .date,
+body.dark-mode #clock-card .day { color: #fff; }
 
 
 </style>
@@ -443,6 +475,21 @@ body.dark-mode #projects-card .project-card:hover a {
   </div>
 </div>
 
+<!-- CLOCK CARD -->
+ <p><br></p>
+<div class="card" id="clock-card">
+  <h2> Time </h2>
+  <div class="clock-container">
+    <div class="emoji time-emoji" id="timeEmoji">☀️</div>
+    <div class="emoji weather-emoji" id="weatherEmoji">🌤️</div>
+    <div class="time" id="clockTime">00:00:00</div>
+    <div class="date" id="clockDate">January 1, 2025</div>
+    <div class="day" id="clockDay">Wednesday</div>
+   
+  </div>
+</div>
+
+
 
 <!-- FOOTER -->
 <footer>© <span id="year"></span> Asaduzzaman Rony | All rights reserved.</footer>
@@ -522,6 +569,35 @@ popup.addEventListener("click",(e)=>{if(e.target===popup) popup.classList.remove
 
 // AUTO FOOTER YEAR
 document.getElementById("year").textContent=new Date().getFullYear();
+
+// ===== CLOCK & DAY/NIGHT FOR CLOCK CARD =====
+function updateProfileClock(){
+  const now = new Date();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const seconds = now.getSeconds();
+  const ampm = hours >= 12 ? "PM" : "AM";
+  const hour12 = hours % 12 || 12;
+
+  document.getElementById("clockTime").textContent =
+    `${hour12.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')} ${ampm}`;
+
+  const options = {year:'numeric',month:'long',day:'numeric'};
+  document.getElementById("clockDate").textContent = now.toLocaleDateString('en-US',options);
+
+  const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  document.getElementById("clockDay").textContent = days[now.getDay()];
+
+  const timeEmoji = document.getElementById("timeEmoji");
+  if(hours>=6 && hours<18){timeEmoji.textContent="☀️";}
+  else{timeEmoji.textContent="🌙";}
+}
+
+// Update clock every second
+setInterval(updateProfileClock, 1000);
+updateProfileClock();
+
+
 </script>
 </body>
 </html>
