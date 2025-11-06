@@ -108,6 +108,18 @@ body {
 .close-btn:hover { transform:scale(1.2); background:#ff1744; }
 
 /* ----------------------
+   POPUP TEXT DARK MODE
+----------------------- */
+body.dark-mode .popup-box p {
+  color: #000;  /* white text in dark mode */
+}
+body.dark-mode .popup-box h3 {
+  color: #00a6ffd7; /* keep heading color same or adjust if needed */
+}
+
+
+
+/* ----------------------
    CARDS STYLES
 ----------------------- */
 .cards-container {
@@ -354,38 +366,37 @@ body.dark-mode #projects-card .project-card a {
 body.dark-mode #projects-card .project-card:hover a {
   color: #fff; /* Ensure hover keeps white */
 }
+/* ----------------------
+   CLOCK CARD */
 
-#clock-card {
-  position: relative;
-  overflow: hidden;
-  text-align: center;
-}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Roboto', sans-serif; background: linear-gradient(135deg, #74ebd5, #ACB6E5); color: #333; display: flex; flex-direction: column; align-items: center; padding: 40px 20px 20px 20px; transition: background 0.5s, color 0.5s; }
 
-#clock-card .clock-container {
-  padding: 20px;
-  position: relative;
-}
-
-#clock-card .emoji {
-  position: absolute;
-  font-size: 40px;
-  opacity: 0.9;
-  transition: transform 0.5s ease;
-}
-
+#clock-card { position: relative; overflow: hidden; text-align: center; transition: background 1s, color 0.5s, border 0.5s; border-radius:15px; padding:25px; width:350px; margin:20px; }
+#clock-card .clock-container { padding:20px; position: relative; }
+#clock-card .emoji { position: absolute; font-size:40px; opacity:0.9; transition: transform 0.5s ease; z-index:2; }
 #clock-card .time-emoji { top: 10%; left: 5%; }
 #clock-card .weather-emoji { top: 10%; right: 5%; }
+#clock-card .clock-display { padding:15px; border-radius:10px; display:inline-block; background: linear-gradient(135deg, #ffffff, #e6f7ff); border:2px solid transparent; transition: background 0.5s, color 0.5s, border 0.5s, box-shadow 0.3s, transform 0.3s; position: relative; z-index:1; }
+#clock-card .clock-display:hover { box-shadow: 0 0 15px #06f380, 0 0 10px #0ce1ba, 0 0 45px #0c0c0c; transform: scale(1.05); }
+#clock-card .time { font-size:36px; color:#00a6ffd7; font-weight:bold; margin-top:30px; }
+#clock-card .date { font-size:18px; color:#333; margin-top:5px; }
+#clock-card .day { font-size:16px; color:#555; margin-top:5px; }
+/* body.dark-mode #clock-card .clock-display { background:#080808 !important; color:#00ffff !important; border:2px solid #00ffff !important; }
+*/
+body.dark-mode #clock-card .time { color: #00a6ff !important; }   /* Clock time */
+body.dark-mode #clock-card .date { color: #f6f8f8 !important; }   /* Date text */
+body.dark-mode #clock-card .day  { color: #f7fafa !important; }   /* Day text */
 
-#clock-card .time { font-size: 36px; color: #00a6ffd7; font-weight: bold; margin-top: 30px; }
-#clock-card .date { font-size: 18px; color: #333; margin-top: 5px; }
-#clock-card .day { font-size: 16px; color: #555; margin-top: 5px; }
-#clock-card .temp { font-size: 18px; color: #00a6ffd7; margin-top: 8px; }
 
-/* Dark mode adaptation */
-body.dark-mode #clock-card .time,
-body.dark-mode #clock-card .temp { color: #00a6ffd7; }
-body.dark-mode #clock-card .date,
-body.dark-mode #clock-card .day { color: #fff; }
+body.dark-mode #clock-card .clock-display { 
+  background:#080808 !important; 
+  color:#00ffff !important; 
+  border:2px solid #00ffff !important; 
+}
+  
+
+
 
 
 </style>
@@ -482,12 +493,14 @@ body.dark-mode #clock-card .day { color: #fff; }
   <div class="clock-container">
     <div class="emoji time-emoji" id="timeEmoji">☀️</div>
     <div class="emoji weather-emoji" id="weatherEmoji">🌤️</div>
-    <div class="time" id="clockTime">00:00:00</div>
-    <div class="date" id="clockDate">January 1, 2025</div>
-    <div class="day" id="clockDay">Wednesday</div>
-   
+    <div class="clock-display">
+      <div class="time" id="clockTime">00:00:00</div>
+      <div class="date" id="clockDate">January 1, 2025</div>
+      <div class="day" id="clockDay">Wednesday</div>
+    </div>
   </div>
 </div>
+
 
 
 
@@ -571,6 +584,7 @@ popup.addEventListener("click",(e)=>{if(e.target===popup) popup.classList.remove
 document.getElementById("year").textContent=new Date().getFullYear();
 
 // ===== CLOCK & DAY/NIGHT FOR CLOCK CARD =====
+
 function updateProfileClock(){
   const now = new Date();
   const hours = now.getHours();
@@ -578,22 +592,32 @@ function updateProfileClock(){
   const seconds = now.getSeconds();
   const ampm = hours >= 12 ? "PM" : "AM";
   const hour12 = hours % 12 || 12;
+  document.getElementById("clockTime").textContent = `${hour12.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')} ${ampm}`;
 
-  document.getElementById("clockTime").textContent =
-    `${hour12.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')} ${ampm}`;
-
-  const options = {year:'numeric',month:'long',day:'numeric'};
-  document.getElementById("clockDate").textContent = now.toLocaleDateString('en-US',options);
+  const options = { year:'numeric', month:'long', day:'numeric' };
+  document.getElementById("clockDate").textContent = now.toLocaleDateString('en-US', options);
 
   const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
   document.getElementById("clockDay").textContent = days[now.getDay()];
 
-  const timeEmoji = document.getElementById("timeEmoji");
-  if(hours>=6 && hours<18){timeEmoji.textContent="☀️";}
-  else{timeEmoji.textContent="🌙";}
-}
+  const clockCard = document.getElementById("clock-card");
+  let bg = "", emoji = "";
+  if(hours>=6 && hours<9){ bg="linear-gradient(135deg, #FFFB7D, #FFD700)"; emoji="🌅"; }
+  else if(hours>=9 && hours<12){ bg="linear-gradient(135deg, #87CEFA, #00BFFF)"; emoji="☀️"; }
+  else if(hours>=12 && hours<15){ bg="linear-gradient(135deg, #00BFFF, #1E90FF)"; emoji="☀️"; }
+  else if(hours>=15 && hours<18){ bg="linear-gradient(135deg, #87CEFA, #FFD700)"; emoji="🌤️"; }
+  else if(hours>=18 && hours<20){ bg="linear-gradient(135deg, #FF7E5F, #2C3E50)"; emoji="🌇"; }
+  else if(hours>=20 && hours<24){ bg="linear-gradient(135deg, #2C3E50, #000046)"; emoji="🌙"; }
+  else{ bg="linear-gradient(135deg, #2C3E50, #000022)"; emoji="🌙"; }
 
-// Update clock every second
+  clockCard.style.background = bg;
+  const timeEmojiEl = document.getElementById("timeEmoji");
+  timeEmojiEl.textContent = emoji;
+  // Bring emojis to front during hover
+  const clockDisplay = document.querySelector('#clock-card .clock-display');
+  clockDisplay.addEventListener('mouseenter', ()=>{ timeEmojiEl.style.zIndex = 3; document.getElementById('weatherEmoji').style.zIndex = 3; });
+  clockDisplay.addEventListener('mouseleave', ()=>{ timeEmojiEl.style.zIndex = 2; document.getElementById('weatherEmoji').style.zIndex = 2; });
+}
 setInterval(updateProfileClock, 1000);
 updateProfileClock();
 
