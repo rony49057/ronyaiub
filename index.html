@@ -449,6 +449,8 @@ body.dark-mode #clock-card .clock-display {
   <div class="card" id="skills-card">
     <h2>Skills</h2>
     <div class="skill"><span class="skill-name">HTML / CSS</span><div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div></div>
+    <div class="skill"><span class="skill-name">Java Scrit</span><div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div></div>
+    <div class="skill"><span class="skill-name">PHP</span><div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div></div>
     <div class="skill"><span class="skill-name">Java</span><div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div></div>
     <div class="skill"><span class="skill-name">C#</span><div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div></div>
     <div class="skill"><span class="skill-name">C++</span><div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div></div>
@@ -521,7 +523,7 @@ document.querySelectorAll('.card').forEach((card,idx)=>{setTimeout(()=>{card.cla
 
 // SKILL BAR FILL
 const fills=document.querySelectorAll('.skill-fill');
-const widths=["80%","75%","80%","75%","75%"];
+const widths=["80%","75%","80%","75%","75%","75%","75%"];
 fills.forEach((fill,idx)=>{setTimeout(()=>{fill.style.width=widths[idx];},1000);});
 
 // DARK/LIGHT MODE TOGGLE
@@ -625,4 +627,5 @@ updateProfileClock();
 </script>
 </body>
 </html>
+
 
