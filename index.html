@@ -133,12 +133,16 @@ body.dark-mode .popup-box h3 { color: #00a6ffd7; }
   transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s ease, border 0.3s ease, background 0.3s ease;
 }
 .card.show { opacity:1; transform:translateY(0); }
+
+/* All cards hover  */
 .card:hover {
   transform:scale(1.05);
   box-shadow:0 20px 40px rgba(0,0,0,0.3);
   border:2px solid #00a6ffd7;
   background: linear-gradient(135deg, #ffffff, #e6f7ff);
 }
+
+
 
 /* CARD HEADER & BIO */
 .card h2 {
@@ -315,8 +319,15 @@ body.dark-mode .project-card:hover{
   padding:25px;
   width:350px;
   margin:20px;
-  transition: background 1s, color 0.5s, border 0.5s;
+  will-change: transform, box-shadow;
+  transition: 
+    background 1s, 
+    color 0.5s, 
+    border 0.5s,
+    transform 450ms cubic-bezier(.2,.8,.2,1),
+    box-shadow 450ms cubic-bezier(.2,.8,.2,1);
 }
+
 #clock-card .clock-container { padding:20px; position: relative; }
 
 /* Emojis */
@@ -332,6 +343,8 @@ body.dark-mode .project-card:hover{
 #clock-card .weather-emoji { top: 10%; right: 5%; }
 
 /* glass display */
+/* ✅ Inside clock: hover effect + border glow (smooth) */
+/* ✅ CLOCK DISPLAY (base) */
 #clock-card .clock-display{
   padding:15px;
   border-radius:14px;
@@ -339,16 +352,36 @@ body.dark-mode .project-card:hover{
   background: rgba(255,255,255,0.80);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+
   border: 2px solid rgba(255,255,255,0.45);
   box-shadow: 0 12px 30px rgba(0,0,0,0.25);
-  transition: background 0.5s, color 0.5s, border 0.5s, box-shadow 0.3s, transform 0.3s;
+
   position: relative;
   z-index:1;
+
+  /* smooth + neon ready */
+  will-change: transform, box-shadow, border-color;
+  transition:
+    transform 380ms cubic-bezier(.2,.8,.2,1),
+    box-shadow 380ms cubic-bezier(.2,.8,.2,1),
+    border-color 380ms ease,
+    background 380ms ease;
 }
-#clock-card .clock-display:hover {
-  box-shadow: 0 0 15px #06f380, 0 0 10px #0ce1ba, 0 0 45px #0c0c0c;
-  transform: scale(1.05);
+
+/* ✅ HOVER (old neon feel কিন্তু smooth) */
+#clock-card .clock-display:hover{
+  transform: translateY(-8px);          /* smooth lift */
+  border-color: rgba(0,166,255,0.90);   /* glow border */
+
+  /* bring back your old neon vibe */
+  box-shadow:
+    0 18px 45px rgba(0,0,0,0.32),
+    0 0 15px rgba(6,243,128,0.55),
+    0 0 20px rgba(12,225,186,0.45),
+    0 0 45px rgba(12,12,12,0.55);
 }
+
+
 
 #clock-card .time{
   font-size:40px;
