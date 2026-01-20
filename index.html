@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Asaduzzaman Rony</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
 /* ----------------------
    GLOBAL STYLES
@@ -87,6 +88,7 @@ body {
   opacity:0;
   transition: all 0.4s ease;
   box-shadow: 0 0 25px #00a6ffd7 ;  
+  position:relative;
 }
 .popup-overlay.active .popup-box { transform:translateY(0) scale(1); opacity:1; }
 .popup-box img {
@@ -106,18 +108,8 @@ body {
   transition: transform 0.3s;
 }
 .close-btn:hover { transform:scale(1.2); background:#ff1744; }
-
-/* ----------------------
-   POPUP TEXT DARK MODE
------------------------ */
-body.dark-mode .popup-box p {
-  color: #000;  /* white text in dark mode */
-}
-body.dark-mode .popup-box h3 {
-  color: #00a6ffd7; /* keep heading color same or adjust if needed */
-}
-
-
+body.dark-mode .popup-box p { color: #000; }
+body.dark-mode .popup-box h3 { color: #00a6ffd7; }
 
 /* ----------------------
    CARDS STYLES
@@ -163,10 +155,7 @@ body.dark-mode .popup-box h3 {
   min-height:26px;
   margin-bottom:15px;
 }
-.bio::after {
-  content:'|';
-  animation: blink 0.7s infinite;
-}
+.bio::after { content:'|'; animation: blink 0.7s infinite; }
 @keyframes blink {0%,50%,100%{opacity:1;}25%,75%{opacity:0;}}
 
 /* INFO & LINKS */
@@ -181,7 +170,7 @@ body.dark-mode .popup-box h3 {
 }
 .info p:hover { background: rgba(0,123,255,0.1); }
 
-.links { display:flex; justify-content:center; gap:15px; margin-top:15px; }
+.links { display:flex; justify-content:center; gap:15px; margin-top:15px; flex-wrap:wrap; }
 .links a {
   text-decoration:none;
   color:white;
@@ -197,7 +186,7 @@ body.dark-mode .popup-box h3 {
   box-shadow:0 0 8px #28a745;
 }
 
-/* SKILLS & PROJECTS */
+/* SKILLS */
 .skill { margin:10px 0; }
 .skill-name { font-weight:bold; }
 .skill-bar {
@@ -214,6 +203,10 @@ body.dark-mode .popup-box h3 {
   border-radius:8px;
   transition: width 1.5s ease;
 }
+
+/* ----------------------
+   PROJECTS (AESTHETIC - RGB OFF ✅)
+----------------------- */
 .projects {
   display:flex;
   flex-wrap:wrap;
@@ -221,58 +214,42 @@ body.dark-mode .popup-box h3 {
   gap:15px;
   margin-top:15px;
 }
+
+/* Clean project card (no rgb, no animation, no glowing ::before) */
 .project-card {
-  background:#f7f7f7;
+  background:#ffffff;
   width:150px;
-  padding:15px;
-  border-radius:10px;
+  padding:14px 12px;
+  border-radius:12px;
   text-align:center;
   position:relative;
   overflow:hidden;
-  border: 2px solid; /* set border */
-  border-image-slice: 1;
-  border-width: 5px;
-  ;
-  border-image-source: linear-gradient(45deg, #00a6ff, #28a745, #ff9800, #ff4081);
-  border-image-repeat: round;
-  transition: transform 0.3s, box-shadow 0.3s;
-  animation: borderGradient 8s linear infinite;
+
+  border: 1px solid rgba(0,0,0,0.10);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.10);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
 }
 
-@keyframes borderGradient {
-  0% { border-image-source: linear-gradient(45deg, #00a6ff, #28a745,  #ff4081); }
-  25% { border-image-source: linear-gradient(45deg, #28a745,  #ff4081, #00a6ff); }
-  50% { border-image-source: linear-gradient(45deg,  #ff4081, #00a6ff, #28a745); }
-  75% { border-image-source: linear-gradient(45deg, #ff4081, #00a6ff, #28a745); }
-  100% { border-image-source: linear-gradient(45deg, #00a6ff, #28a745, #ff4081); }
+/* Remove old animated border + pseudo glow */
+.project-card::before { content:none !important; }
+
+/* Link style */
+.project-card a {
+  text-decoration:none;
+  color:#0b2b45;
+  font-weight:700;
+  letter-spacing:0.2px;
+  display:block;
 }
 
-.project-card::before {
-  content:"";
-  position:absolute;
-  top:-50%; left:-50%;
-  width:200%; height:200%;
-  border-radius: 10px;
-  background:linear-gradient(45deg,#00a6ffd7,#28a745,#ff4081);
-  background-size:400% 400%;
-  filter: blur(10px);
-  opacity:0;
-  transition: opacity 0.3s;
-  border-radius:10px;
-  z-index:0;
-  animation: gradientMove 8s linear infinite;
+/* Hover: subtle premium */
+.project-card:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 18px 32px rgba(0,0,0,0.18);
+  border-color: rgba(0,166,255,0.55);
+  background: linear-gradient(135deg, #ffffff, #eef9ff);
 }
-@keyframes gradientMove{0%{background-position:0% 0%;}50%{background-position:100% 100%;}100%{background-position:0% 0%;}}
-.project-card:hover::before { opacity:1; }
-.project-card a { position:relative;
-   z-index:1; text-decoration:none;  color:#000; font-weight:bold;
-   transition: color 0.3s; }
-.project-card:hover a { color:#fff; border-radius:10px}
-.project-card:hover { transform:scale(1.05); 
-  box-shadow:0 10px 20px rgba(0,0,0,0.3);
-  border: 2px solid transparent;
-  border-radius: 10px;
-}
+.project-card:hover a { color:#08314f; }
 
 /* FOOTER */
 footer {
@@ -292,115 +269,139 @@ footer {
 /* ----------------------
    DARK MODE
 ----------------------- */
-body.dark-mode { 
-  background: #000; 
-  color: #f0f0f0; 
-}
+body.dark-mode { background:#000; color:#f0f0f0; }
+body.dark-mode h1 { color:#fff; }
+body.dark-mode .card { background:#000; border: 1px solid #f90505; }
+body.dark-mode .card:hover { background:#000; border: 2px solid #00a6ffd7; }
 
-body.dark-mode h1 { 
-  color: #fff; 
-}
+/* PERSONAL CARD */
+body.dark-mode #personal-card h2{ color:#00ff00; }
+body.dark-mode #personal-card .bio { color:#00a6ffd7; }
+body.dark-mode #personal-card .info p { color:#ffffff; }
 
-/* ----------------------
-   CARDS DARK MODE
------------------------ */
-body.dark-mode .card {
-  background: #000;
-  border: 1px solid #f90505;
-}
+/* CONTACT CARD */
+body.dark-mode #contact-card h2 { color:#00ff00; }
+body.dark-mode #contact-card .info p { color:#ffffff; }
+body.dark-mode #contact-card .links a { background:#00a6ffef; color:#fff; }
+body.dark-mode #contact-card .links a:hover { background-color:#28a745; }
 
-/* Card hover effect */
-body.dark-mode .card:hover {
-  background: #000;
-  border: 2px solid #00a6ffd7;
-}
-
-/* ----------------------
-   PERSONAL CARD
------------------------ */
-body.dark-mode #personal-card h2{ color: #00ff00; /* Green heading */ }
-body.dark-mode #personal-card .bio {
-  color: #00a6ffd7; /* Sky Blue for heading & bio */
-}
-body.dark-mode #personal-card .info p {
-  color: #ffffff; /* White for inner texts */
-}
-
-/* ----------------------
-   CONTACT CARD
------------------------ */
-body.dark-mode #contact-card h2 {
-  color: #00ff00; /* Pink heading */
-}
-body.dark-mode #contact-card .info p {
-  color: #ffffff; /* White text */
-}
-body.dark-mode #contact-card .links a {
-  background: #00a6ffef; /* Sky blue links */
-  color: #fff; /* Link text white */
-}
-body.dark-mode #contact-card .links a:hover {
-  background-color: #28a745; /* Green hover */
-}
-
-/* ----------------------
-   SKILLS CARD
------------------------ */
+/* SKILLS CARD */
 body.dark-mode #skills-card h2{color:#00ff00;}
-body.dark-mode #skills-card .skill-name {
-  color: #fff; /* Green heading and skill names */
+body.dark-mode #skills-card .skill-name { color:#fff; }
+body.dark-mode #skills-card .skill-fill { background:#00a6ffd7; }
+
+/* PROJECTS CARD (dark aesthetic) */
+body.dark-mode #projects-card h2 { color:#00a6ffd7; }
+body.dark-mode .project-card {
+  background:#0b0b0b;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.45);
 }
-body.dark-mode #skills-card .skill-fill {
-  background: #00a6ffd7; /* Sky blue bars */
+body.dark-mode .project-card a { color:#ffffff; }
+body.dark-mode .project-card:hover{
+  border-color: rgba(0,166,255,0.70);
+  background: #0b0b0b;
+  box-shadow: 0 18px 32px rgba(0,0,0,0.65);
 }
 
 /* ----------------------
-   PROJECTS CARD
+   CLOCK CARD
 ----------------------- */
-body.dark-mode #projects-card h2 {
-  color: #00a6ffd7; /* Orange heading */
+#clock-card{
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  border-radius:15px;
+  padding:25px;
+  width:350px;
+  margin:20px;
+  transition: background 1s, color 0.5s, border 0.5s;
 }
-body.dark-mode #projects-card .project-card a {
-  color: #000; /* White project names */
-}
-body.dark-mode #projects-card .project-card:hover a {
-  color: #fff; /* Ensure hover keeps white */
-}
-/* ----------------------
-   CLOCK CARD */
-
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: 'Roboto', sans-serif; background: linear-gradient(135deg, #74ebd5, #ACB6E5); color: #333; display: flex; flex-direction: column; align-items: center; padding: 40px 20px 20px 20px; transition: background 0.5s, color 0.5s; }
-
-#clock-card { position: relative; overflow: hidden; text-align: center; transition: background 1s, color 0.5s, border 0.5s; border-radius:15px; padding:25px; width:350px; margin:20px; }
 #clock-card .clock-container { padding:20px; position: relative; }
-#clock-card .emoji { position: absolute; font-size:40px; opacity:0.9; transition: transform 0.5s ease; z-index:2; }
+
+/* Emojis */
+#clock-card .emoji{
+  position: absolute;
+  font-size:40px;
+  opacity:0.92;
+  transition: transform 0.35s ease, filter 0.35s ease;
+  z-index:2;
+  pointer-events:auto;
+}
 #clock-card .time-emoji { top: 10%; left: 5%; }
 #clock-card .weather-emoji { top: 10%; right: 5%; }
-#clock-card .clock-display { padding:15px; border-radius:10px; display:inline-block; background: linear-gradient(135deg, #ffffff, #e6f7ff); border:2px solid transparent; transition: background 0.5s, color 0.5s, border 0.5s, box-shadow 0.3s, transform 0.3s; position: relative; z-index:1; }
-#clock-card .clock-display:hover { box-shadow: 0 0 15px #06f380, 0 0 10px #0ce1ba, 0 0 45px #0c0c0c; transform: scale(1.05); }
-#clock-card .time { font-size:36px; color:#00a6ffd7; font-weight:bold; margin-top:30px; }
-#clock-card .date { font-size:18px; color:#333; margin-top:5px; }
-#clock-card .day { font-size:16px; color:#555; margin-top:5px; }
-/* body.dark-mode #clock-card .clock-display { background:#080808 !important; color:#00ffff !important; border:2px solid #00ffff !important; }
-*/
-body.dark-mode #clock-card .time { color: #00a6ff !important; }   /* Clock time */
-body.dark-mode #clock-card .date { color: #f6f8f8 !important; }   /* Date text */
-body.dark-mode #clock-card .day  { color: #f7fafa !important; }   /* Day text */
 
-
-body.dark-mode #clock-card .clock-display { 
-  background:#080808 !important; 
-  color:#00ffff !important; 
-  border:2px solid #00ffff !important; 
+/* glass display */
+#clock-card .clock-display{
+  padding:15px;
+  border-radius:14px;
+  display:inline-block;
+  background: rgba(255,255,255,0.80);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid rgba(255,255,255,0.45);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  transition: background 0.5s, color 0.5s, border 0.5s, box-shadow 0.3s, transform 0.3s;
+  position: relative;
+  z-index:1;
 }
-  
+#clock-card .clock-display:hover {
+  box-shadow: 0 0 15px #06f380, 0 0 10px #0ce1ba, 0 0 45px #0c0c0c;
+  transform: scale(1.05);
+}
 
+#clock-card .time{
+  font-size:40px;
+  font-weight:800;
+  letter-spacing: 1px;
+  margin-top:30px;
+  line-height:1.2;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.35);
+  color:#0b2b45;
+}
+#clock-card .date{
+  font-size:18px;
+  margin-top:5px;
+  font-weight:700;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.25);
+  color:#163a57;
+}
+#clock-card .day{
+  font-size:16px;
+  margin-top:5px;
+  font-weight:700;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.25);
+  color:#163a57;
+}
+@media (max-width: 500px){
+  #clock-card{ width: 92%; }
+  #clock-card .time{ font-size:30px; }
+}
 
+/* ✅ Dark mode: clock display always dark */
+body.dark-mode #clock-card .clock-display{
+  background: rgba(0,0,0,0.68) !important;
+  border: 2px solid rgba(255,255,255,0.18) !important;
+}
+body.dark-mode #clock-card .time,
+body.dark-mode #clock-card .date,
+body.dark-mode #clock-card .day{
+  color: #ffffff !important;
+}
 
-
+/* ✅ Emoji hover effect (direct hover) */
+#clock-card .emoji:hover{
+  transform: scale(1.25) rotate(-10deg);
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.75));
+}
+/* Better: use container hover to affect both emojis */
+#clock-card .clock-container:hover .emoji{
+  transform: scale(1.18) rotate(-8deg);
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.65));
+}
 </style>
 </head>
+
 <body>
 
 <!-- Theme Toggle -->
@@ -413,9 +414,8 @@ body.dark-mode #clock-card .clock-display {
 
 <h1>Asaduzzaman Rony</h1>
 
-<!-- CARDS CONTAINER -->
 <div class="cards-container">
-  <!-- Personal Info Card -->
+
   <div class="card" id="personal-card">
     <h2>Personal Information</h2>
     <div class="bio" id="bio"></div>
@@ -430,7 +430,6 @@ body.dark-mode #clock-card .clock-display {
     </div>
   </div>
 
-  <!-- Contact Info Card -->
   <div class="card" id="contact-card">
     <h2>Contact Information</h2>
     <div class="info">
@@ -445,11 +444,10 @@ body.dark-mode #clock-card .clock-display {
     </div>
   </div>
 
-  <!-- Skills Card -->
   <div class="card" id="skills-card">
     <h2>Skills</h2>
     <div class="skill"><span class="skill-name">HTML / CSS</span><div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div></div>
-    <div class="skill"><span class="skill-name">Java Scrit</span><div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div></div>
+    <div class="skill"><span class="skill-name">Java Script</span><div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div></div>
     <div class="skill"><span class="skill-name">PHP</span><div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div></div>
     <div class="skill"><span class="skill-name">Java</span><div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div></div>
     <div class="skill"><span class="skill-name">C#</span><div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div></div>
@@ -457,15 +455,16 @@ body.dark-mode #clock-card .clock-display {
     <div class="skill"><span class="skill-name">Database Management</span><div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div></div>
   </div>
 
-  <!-- Projects Card -->
   <div class="card" id="projects-card">
     <h2>Projects</h2>
     <div class="projects">
       <div class="project-card"><a href="https://github.com/rony49057/java-project" target="_blank">Java Project</a></div>
       <div class="project-card"><a href="https://github.com/rony49057/c-sharp-project" target="_blank">C# Project</a></div>
       <div class="project-card"><a href="https://github.com/rony49057/cg" target="_blank">C++ / CG Project</a></div>
+      <div class="project-card"><a href="https://github.com/rony49057/MobileMart" target="_blank">Webtech Project</a></div>
     </div>
   </div>
+
 </div>
 
 <!-- POPUP -->
@@ -480,7 +479,6 @@ body.dark-mode #clock-card .clock-display {
     <p id="popupSchool"></p>
     <p id="popupPhone"></p>
     <p id="popupEmail"></p>
-    <!-- Added Social Links -->
     <div class="links">
       <a href="https://www.facebook.com/rony49057" target="_blank">Facebook</a>
       <a href="https://www.instagram.com/rony_49057" target="_blank">Instagram</a>
@@ -489,13 +487,14 @@ body.dark-mode #clock-card .clock-display {
 </div>
 
 <!-- CLOCK CARD -->
- <p><br></p>
+<p><br></p>
 <div class="card" id="clock-card">
-  <h2>Real Time </h2>
-  <div class="clock-container">
+  <h2 style="color:blue;"><b>Time</b></h2>
+  <div class="clock-container" id="clockContainer">
     <div class="emoji time-emoji" id="timeEmoji">☀️</div>
     <div class="emoji weather-emoji" id="weatherEmoji">🌤️</div>
-    <div class="clock-display">
+
+    <div class="clock-display" id="clockDisplay">
       <div class="time" id="clockTime">00:00:00</div>
       <div class="date" id="clockDate">January 1, 2025</div>
       <div class="day" id="clockDay">Wednesday</div>
@@ -503,32 +502,49 @@ body.dark-mode #clock-card .clock-display {
   </div>
 </div>
 
-
-
-
-<!-- FOOTER -->
 <footer>© <span id="year"></span> Asaduzzaman Rony | All rights reserved.</footer>
 
 <script>
 // ----------------------
 // TYPING BIO ANIMATION
-const phrases=["Disciplined ","Passionate about coding ","Football lover ⚽ | Barcelona & Argentina"];
+const phrases=["Disciplined ","Passionate about coding ","⚽ Barcelona & Argentina ⚽ "];
 let i=0,j=0,current='',isDeleting=false;
 const bioEl=document.getElementById('bio');
-function type(){const full=phrases[i];current=isDeleting?full.substring(0,j--):full.substring(0,j++);bioEl.textContent=current;if(!isDeleting&&j===full.length){isDeleting=true;setTimeout(type,1500);}else if(isDeleting&&j===0){isDeleting=false;i=(i+1)%phrases.length;setTimeout(type,500);}else{setTimeout(type,isDeleting?50:100);} }
+
+function type(){
+  const full=phrases[i];
+  current=isDeleting?full.substring(0,j--):full.substring(0,j++);
+  bioEl.textContent=current;
+
+  if(!isDeleting && j===full.length){
+    isDeleting=true; setTimeout(type,1500);
+  }else if(isDeleting && j===0){
+    isDeleting=false; i=(i+1)%phrases.length; setTimeout(type,500);
+  }else{
+    setTimeout(type,isDeleting?50:100);
+  }
+}
 type();
 
 // SHOW CARDS ANIMATION
-document.querySelectorAll('.card').forEach((card,idx)=>{setTimeout(()=>{card.classList.add('show');}, idx*300);});
+document.querySelectorAll('.card').forEach((card,idx)=>{
+  setTimeout(()=>{card.classList.add('show');}, idx*300);
+});
 
 // SKILL BAR FILL
 const fills=document.querySelectorAll('.skill-fill');
-const widths=["80%","75%","80%","75%","75%","75%","75%"];
-fills.forEach((fill,idx)=>{setTimeout(()=>{fill.style.width=widths[idx];},1000);});
+const widths=["80%","75%","80%","75%","75%","80%","80%"];
+fills.forEach((fill,idx)=>{
+  setTimeout(()=>{fill.style.width=widths[idx];},1000);
+});
 
 // DARK/LIGHT MODE TOGGLE
 const toggle=document.getElementById('theme-toggle');
-toggle.addEventListener('click',()=>{document.body.classList.toggle('dark-mode'); toggle.textContent=document.body.classList.contains('dark-mode')?'☀️':'🌙';});
+toggle.addEventListener('click',()=>{
+  document.body.classList.toggle('dark-mode');
+  toggle.textContent=document.body.classList.contains('dark-mode')?'☀️':'🌙';
+  updateProfileClock();
+});
 
 // PROFILE PIC DYNAMIC CHANGE
 const profilePics=[
@@ -537,18 +553,15 @@ const profilePics=[
   "https://rony49057.github.io/ronyaiub/profilepic3.jpg",
   "https://rony49057.github.io/ronyaiub/profilepic4.jpg"
 ];
-const animations=['anim1','anim2','anim3'];
 let picIndex=0;
 const profilePicEl=document.getElementById("profilePic");
+
 setInterval(()=>{
   profilePicEl.style.opacity=0;
   setTimeout(()=>{
     picIndex=(picIndex+1)%profilePics.length;
     profilePicEl.src=profilePics[picIndex];
     profilePicEl.style.opacity=1;
-    const anim=animations[Math.floor(Math.random()*animations.length)];
-    profilePicEl.style.animation=`${anim} 1s ease`;
-    setTimeout(()=>{profilePicEl.style.animation='';},1000);
   },800);
 },5000);
 
@@ -556,15 +569,17 @@ setInterval(()=>{
 const popup=document.getElementById("popup");
 const closePopup=document.getElementById("closePopup");
 const profileContainer=document.getElementById("profile-container");
+
 const popupData={
   name:"Asaduzzaman Rony",
-  dob:"DOB: 11 Dec",
+  dob:"DOB: 11 Dec 2001",
   university:"American International University-Bangladesh, BSc in CSE",
   college:"Ispahani Public School and College, 2019",
   school:"Comilla Cantonment High School, 2017",
   phone:"017*******8",
   email:"ronyaiubcse@gmail.com"
 };
+
 profileContainer.addEventListener("click",()=>{
   document.getElementById("popupPic").src=profilePics[picIndex];
   document.getElementById("popupName").textContent=popupData.name;
@@ -574,27 +589,91 @@ profileContainer.addEventListener("click",()=>{
   document.getElementById("popupSchool").textContent=popupData.school;
   document.getElementById("popupPhone").textContent=popupData.phone;
   document.getElementById("popupEmail").textContent=popupData.email;
-  
   popup.classList.add("active");
-  
 });
-
 closePopup.addEventListener("click",()=>popup.classList.remove("active"));
-popup.addEventListener("click",(e)=>{if(e.target===popup) popup.classList.remove("active");});
+popup.addEventListener("click",(e)=>{ if(e.target===popup) popup.classList.remove("active"); });
 
 // AUTO FOOTER YEAR
 document.getElementById("year").textContent=new Date().getFullYear();
 
-// ===== CLOCK & DAY/NIGHT FOR CLOCK CARD =====
+// ===== CLOCK + LOCATION WEATHER =====
+const clockDisplay = document.getElementById("clockDisplay");
+const timeEmojiEl = document.getElementById("timeEmoji");
+const weatherEmojiEl = document.getElementById("weatherEmoji");
+
+function weatherCodeToEmoji(code, isNight){
+  if(code === 0) return isNight ? "🌙" : "☀️";
+  if(code === 1 || code === 2) return isNight ? "☁️" : "🌤️";
+  if(code === 3) return "☁️";
+  if(code === 45 || code === 48) return "🌫️";
+  if(code === 51 || code === 53 || code === 55) return "🌦️";
+  if(code === 61 || code === 63 || code === 65) return "🌧️";
+  if(code === 66 || code === 67) return "🌧️";
+  if(code === 71 || code === 73 || code === 75 || code === 77) return "❄️";
+  if(code === 80 || code === 81 || code === 82) return "🌧️";
+  if(code === 85 || code === 86) return "🌨️";
+  if(code === 95 || code === 96 || code === 99) return "⛈️";
+  return "🌤️";
+}
+
+async function updateWeatherByLocation(){
+  const fallback = { lat: 23.8103, lon: 90.4125 }; // Dhaka fallback
+
+  function getPos(){
+    return new Promise((resolve, reject)=>{
+      if(!navigator.geolocation) return reject("Geolocation not supported");
+      navigator.geolocation.getCurrentPosition(
+        (pos)=>resolve({ lat: pos.coords.latitude, lon: pos.coords.longitude }),
+        (err)=>reject(err),
+        { enableHighAccuracy: true, timeout: 8000, maximumAge: 600000 }
+      );
+    });
+  }
+
+  let coords = fallback;
+  try { coords = await getPos(); } catch(e) { coords = fallback; }
+
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lon}&current=weather_code,is_day&timezone=auto`;
+
+  try{
+    const res = await fetch(url);
+    const data = await res.json();
+    const code = data?.current?.weather_code;
+    const isDay = data?.current?.is_day;
+
+    if(typeof code === "number"){
+      weatherEmojiEl.textContent = weatherCodeToEmoji(code, isDay === 0);
+    }else{
+      weatherEmojiEl.textContent = "🌤️";
+    }
+  }catch(e){
+    weatherEmojiEl.textContent = "🌤️";
+  }
+}
+
+// time emoji (avoid same as weather)
+function timeStatusEmoji(hours){
+  if(hours>=6 && hours<9) return "🌅";
+  if(hours>=9 && hours<12) return "🌞";
+  if(hours>=12 && hours<15) return "🕒";
+  if(hours>=15 && hours<18) return "🌤️";
+  if(hours>=18 && hours<20) return "🌇";
+  if(hours>=20 && hours<24) return "🌙";
+  return "🌌";
+}
 
 function updateProfileClock(){
   const now = new Date();
   const hours = now.getHours();
   const minutes = now.getMinutes();
   const seconds = now.getSeconds();
+
   const ampm = hours >= 12 ? "PM" : "AM";
   const hour12 = hours % 12 || 12;
-  document.getElementById("clockTime").textContent = `${hour12.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')} ${ampm}`;
+
+  document.getElementById("clockTime").textContent =
+    `${hour12.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')} ${ampm}`;
 
   const options = { year:'numeric', month:'long', day:'numeric' };
   document.getElementById("clockDate").textContent = now.toLocaleDateString('en-US', options);
@@ -602,30 +681,61 @@ function updateProfileClock(){
   const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
   document.getElementById("clockDay").textContent = days[now.getDay()];
 
+  // background gradient (keep your original)
   const clockCard = document.getElementById("clock-card");
-  let bg = "", emoji = "";
-  if(hours>=6 && hours<9){ bg="linear-gradient(135deg, #FFFB7D, #FFD700)"; emoji="🌅"; }
-  else if(hours>=9 && hours<12){ bg="linear-gradient(135deg, #87CEFA, #00BFFF)"; emoji="☀️"; }
-  else if(hours>=12 && hours<15){ bg="linear-gradient(135deg, #00BFFF, #1E90FF)"; emoji="☀️"; }
-  else if(hours>=15 && hours<18){ bg="linear-gradient(135deg, #87CEFA, #FFD700)"; emoji="🌤️"; }
-  else if(hours>=18 && hours<20){ bg="linear-gradient(135deg, #FF7E5F, #2C3E50)"; emoji="🌇"; }
-  else if(hours>=20 && hours<24){ bg="linear-gradient(135deg, #2C3E50, #000046)"; emoji="🌙"; }
-  else{ bg="linear-gradient(135deg, #2C3E50, #000022)"; emoji="🌙"; }
+  let bg = "";
+
+  if(hours>=6 && hours<9){ bg="linear-gradient(135deg, #FFFB7D, #FFD700)"; }
+  else if(hours>=9 && hours<12){ bg="linear-gradient(135deg, #87CEFA, #00BFFF)"; }
+  else if(hours>=12 && hours<15){ bg="linear-gradient(135deg, #00BFFF, #1E90FF)"; }
+  else if(hours>=15 && hours<18){ bg="linear-gradient(135deg, #87CEFA, #FFD700)"; }
+  else if(hours>=18 && hours<20){ bg="linear-gradient(135deg, #FF7E5F, #2C3E50)"; }
+  else if(hours>=20 && hours<24){ bg="linear-gradient(135deg, #2C3E50, #000046)"; }
+  else { bg="linear-gradient(135deg, #2C3E50, #000022)"; }
 
   clockCard.style.background = bg;
-  const timeEmojiEl = document.getElementById("timeEmoji");
-  timeEmojiEl.textContent = emoji;
-  // Bring emojis to front during hover
-  const clockDisplay = document.querySelector('#clock-card .clock-display');
-  clockDisplay.addEventListener('mouseenter', ()=>{ timeEmojiEl.style.zIndex = 3; document.getElementById('weatherEmoji').style.zIndex = 3; });
-  clockDisplay.addEventListener('mouseleave', ()=>{ timeEmojiEl.style.zIndex = 2; document.getElementById('weatherEmoji').style.zIndex = 2; });
+
+  // set time emoji
+  timeEmojiEl.textContent = timeStatusEmoji(hours);
+
+  // contrast behavior (same as your logic)
+  const isDarkMode = document.body.classList.contains("dark-mode");
+  const timeEl = document.getElementById("clockTime");
+  const dateEl = document.getElementById("clockDate");
+  const dayEl  = document.getElementById("clockDay");
+  const isDarkBgTime = (hours >= 18 || hours < 6);
+
+  if(isDarkMode){
+    clockDisplay.style.background = "rgba(0,0,0,0.68)";
+    clockDisplay.style.border = "2px solid rgba(255,255,255,0.18)";
+    timeEl.style.color = "#ffffff";
+    dateEl.style.color = "#f2f2f2";
+    dayEl.style.color  = "#f2f2f2";
+  } else {
+    if(isDarkBgTime){
+      clockDisplay.style.background = "rgba(0,0,0,0.60)";
+      clockDisplay.style.border = "2px solid rgba(255,255,255,0.20)";
+      timeEl.style.color = "#ffffff";
+      dateEl.style.color = "#eaeaea";
+      dayEl.style.color  = "#eaeaea";
+    } else {
+      clockDisplay.style.background = "rgba(255,255,255,0.80)";
+      clockDisplay.style.border = "2px solid rgba(255,255,255,0.45)";
+      timeEl.style.color = "#0b2b45";
+      dateEl.style.color = "#163a57";
+      dayEl.style.color  = "#163a57";
+    }
+  }
 }
+
+// Update clock every second
 setInterval(updateProfileClock, 1000);
 updateProfileClock();
 
-
+// Update weather now + every 10 minutes
+updateWeatherByLocation();
+setInterval(updateWeatherByLocation, 10 * 60 * 1000);
 </script>
+
 </body>
 </html>
-
-
