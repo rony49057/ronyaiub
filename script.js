@@ -133,7 +133,7 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
     i = i + 1;
     if (i > total) i = 1;
     setPic(i);
-  }, 2800);
+  }, 10000);
 })();
 
 // Name letter-by-letter typing
