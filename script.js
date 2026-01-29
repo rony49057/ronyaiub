@@ -103,14 +103,19 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 })();
 
 // Hero picture rotate + modal sync
+// Hero picture rotate + modal sync (pause on hover + pause while popup open)
 (() => {
   const img = $("#profilePic");
+  const modal = $("#profileModal");
   const modalPic = $("#modalPic");
   if (!img) return;
 
   let i = 1;
   const total = 7;
+  let intervalId = null;
+  let paused = false;
 
+  // preload
   for (let k = 1; k <= total; k++) {
     const im = new Image();
     im.src = `image/pic${k}.jpg`;
@@ -127,14 +132,56 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
     }, 240);
   };
 
-  if (modalPic) modalPic.src = img.src;
+  const startRotation = () => {
+    if (intervalId) return;
+    intervalId = setInterval(() => {
+      if (paused) return;
+      i++;
+      if (i > total) i = 1;
+      setPic(i);
+    }, 6000); // ✅ time here (10 seconds)
+  };
 
-  setInterval(() => {
-    i = i + 1;
-    if (i > total) i = 1;
-    setPic(i);
-  }, 10000);
+  const stopRotation = () => {
+    clearInterval(intervalId);
+    intervalId = null;
+  };
+
+  // start
+  if (modalPic) modalPic.src = img.src;
+  startRotation();
+
+  // pause on hover (desktop)
+  img.addEventListener("mouseenter", () => { paused = true; });
+  img.addEventListener("mouseleave", () => { paused = false; });
+
+  // pause when popup opens, resume when closes
+  $(".hero__picBtn")?.addEventListener("click", () => {
+    paused = true;
+    stopRotation();
+  });
+
+  // Close button / overlay handled by data-close="profile"
+  document.addEventListener("click", (e) => {
+    const t = e.target;
+    if (!(t instanceof HTMLElement)) return;
+
+    if (t.getAttribute("data-close") === "profile") {
+      paused = false;
+      startRotation();
+    }
+  });
+
+  // ESC close popup -> resume
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    if (modal?.classList.contains("is-open")) {
+      paused = false;
+      startRotation();
+    }
+  });
 })();
+
 
 // Name letter-by-letter typing
 (() => {
