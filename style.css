@@ -526,6 +526,28 @@ a{ color:inherit; text-decoration:none; }
 
   .grid--3{ grid-template-columns: 1fr; }
   .grid--4{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+
+  /* ===== FIX: Light mode mobile menu text WHITE ===== */
+@media (max-width: 720px){
+  body.light .nav__links{
+    background: rgba(20, 28, 36, 0.92);  /* dark menu panel */
+    border-color: var(--glow);
+  }
+
+  body.light .nav__links .nav__link{
+    color: #fff !important;              /* WHITE text */
+  }
+
+  body.light .nav__links .nav__link:hover{
+    color: #fff !important;
+    background: rgba(0,166,255,0.12);
+  }
+
+  body.light .nav__links .nav__link.active{
+    color: #fff !important;
+  }
+}
+
 }
 
 /* ===== Light mode (soft sky-blue inside + readable text) ===== */
