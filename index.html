@@ -1,777 +1,408 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Asaduzzaman Rony</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
-<style>
-/* ----------------------
-   GLOBAL STYLES
------------------------ */
-* { margin:0; padding:0; box-sizing:border-box; }
-
-body {
-  font-family: 'Roboto', sans-serif;
-  background: linear-gradient(135deg, #74ebd5, #ACB6E5);
-  color: #333;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px 20px 20px 20px;
-  transition: background 0.5s, color 0.5s;
-}
-
-/* ----------------------
-   THEME TOGGLE BUTTON
------------------------ */
-#theme-toggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-  font-size: 22px;
-  z-index: 1000;
-  transition: transform 0.3s;
-}
-#theme-toggle:hover { transform: rotate(25deg) scale(1.1); }
-@media(max-width:500px) { #theme-toggle { top:10px; right:10px; font-size:18px; } }
-
-/* ----------------------
-   PROFILE PICTURE
------------------------ */
-.profile-pic-container {
-  width: 150px; height: 150px;
-  border-radius: 50%;
-  border: 4px solid #00a6ffd7;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto 25px auto;
-  cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.5s, border-color 0.5s;
-}
-.profile-pic-container:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 25px #00a6ffd7;
-}
-.profile-pic-container img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-  transition: opacity 1s ease, transform 1s ease;
-}
-
-/* ----------------------
-   POPUP STYLES
------------------------ */
-.popup-overlay {
-  position: fixed; top:0; left:0;
-  width:100%; height:100%;
-  background: rgba(0,0,0,0.5);
-  display:flex; justify-content:center; align-items:center;
-  opacity:0; visibility:hidden;
-  transition: opacity 0.3s, visibility 0.3s;
-  z-index:2000;
-}
-.popup-overlay.active { opacity:1; visibility:visible; }
-.popup-box {
-  background:#f9f9f9;
-  border:3px solid #00a6ffd7;
-  border-radius:15px;
-  padding:30px 25px;
-  width:90%; max-width:400px;
-  text-align:center;
-  transform:translateY(50px) scale(0.9);
-  opacity:0;
-  transition: all 0.4s ease;
-  box-shadow: 0 0 25px #00a6ffd7 ;  
-  position:relative;
-}
-.popup-overlay.active .popup-box { transform:translateY(0) scale(1); opacity:1; }
-.popup-box img {
-  width:120px; height:120px;
-  border-radius:50%;
-  border:2px solid #00a6ffd7;
-  margin-bottom:15px;
-}
-.popup-box h3 { color:#00a6ffd7; font-weight:bold; margin-bottom:10px; font-size:22px; }
-.popup-box p { margin:8px 0; font-weight:bold; font-size:16px; }
-.close-btn {
-  position:absolute; top:10px; right:15px;
-  background:#ff4081; color:#fff;
-  border:none; border-radius:50%;
-  width:25px; height:25px;
-  cursor:pointer; font-weight:bold;
-  transition: transform 0.3s;
-}
-.close-btn:hover { transform:scale(1.2); background:#ff1744; }
-body.dark-mode .popup-box p { color: #000; }
-body.dark-mode .popup-box h3 { color: #00a6ffd7; }
-
-/* ----------------------
-   CARDS STYLES
------------------------ */
-.cards-container {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:20px;
-  margin-top:20px;
-}
-.card {
-  background:#fff;
-  border-radius:15px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.2);
-  padding:25px;
-  width:350px;
-  color:#000;
-  opacity:0;
-  transform:translateY(50px);
-  transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s ease, border 0.3s ease, background 0.3s ease;
-}
-.card.show { opacity:1; transform:translateY(0); }
-
-/* All cards hover  */
-.card:hover {
-  transform:scale(1.05);
-  box-shadow:0 20px 40px rgba(0,0,0,0.3);
-  border:2px solid #00a6ffd7;
-  background: linear-gradient(135deg, #ffffff, #e6f7ff);
-}
-
-
-
-/* CARD HEADER & BIO */
-.card h2 {
-  text-align:center;
-  margin-bottom:15px;
-  color:#00a6ffd7;
-  padding:5px 0;
-}
-.bio {
-  font-weight:bold;
-  font-style:italic;
-  text-align:center;
-  color:#00a6ffd7;
-  min-height:26px;
-  margin-bottom:15px;
-}
-.bio::after { content:'|'; animation: blink 0.7s infinite; }
-@keyframes blink {0%,50%,100%{opacity:1;}25%,75%{opacity:0;}}
-
-/* INFO & LINKS */
-.info p {
-  margin:8px 0;
-  padding:6px 8px;
-  border-radius:5px;
-  transition: background 0.3s;
-  color:#333;
-  font-weight:500;
-  text-align:left;
-}
-.info p:hover { background: rgba(0,123,255,0.1); }
-
-.links { display:flex; justify-content:center; gap:15px; margin-top:15px; flex-wrap:wrap; }
-.links a {
-  text-decoration:none;
-  color:white;
-  background-color:#00a6ffd7;
-  padding:8px 14px;
-  border-radius:8px;
-  font-weight:bold;
-  transition: all 0.3s ease, box-shadow 0.3s;
-}
-.links a:hover {
-  background-color:#28a745;
-  transform:scale(1.1);
-  box-shadow:0 0 8px #28a745;
-}
-
-/* SKILLS */
-.skill { margin:10px 0; }
-.skill-name { font-weight:bold; }
-.skill-bar {
-  width:100%;
-  background:#eee;
-  border-radius:8px;
-  overflow:hidden;
-  margin-top:5px;
-}
-.skill-fill {
-  height:10px;
-  width:0%;
-  background:#00a6ffd7;
-  border-radius:8px;
-  transition: width 1.5s ease;
-}
-
-/* ----------------------
-   PROJECTS (AESTHETIC - RGB OFF ✅)
------------------------ */
-.projects {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:15px;
-  margin-top:15px;
-}
-
-/* Clean project card (no rgb, no animation, no glowing ::before) */
-.project-card {
-  background:#ffffff;
-  width:150px;
-  padding:14px 12px;
-  border-radius:12px;
-  text-align:center;
-  position:relative;
-  overflow:hidden;
-
-  border: 1px solid rgba(0,0,0,0.10);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.10);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
-}
-
-/* Remove old animated border + pseudo glow */
-.project-card::before { content:none !important; }
-
-/* Link style */
-.project-card a {
-  text-decoration:none;
-  color:#0b2b45;
-  font-weight:700;
-  letter-spacing:0.2px;
-  display:block;
-}
-
-/* Hover: subtle premium */
-.project-card:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 18px 32px rgba(0,0,0,0.18);
-  border-color: rgba(0,166,255,0.55);
-  background: linear-gradient(135deg, #ffffff, #eef9ff);
-}
-.project-card:hover a { color:#08314f; }
-
-/* FOOTER */
-footer {
-  margin-top:30px;
-  font-size:14px;
-  text-align:center;
-  color:#fff;
-  padding:10px 0;
-  width:100%;
-  border-radius:10px;
-  background: linear-gradient(270deg,#00a6ffd7,#28a745,#ff4081);
-  background-size:800% 800%;
-  animation: footerBG 15s ease infinite;
-}
-@keyframes footerBG{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
-
-/* ----------------------
-   DARK MODE
------------------------ */
-body.dark-mode { background:#000; color:#f0f0f0; }
-body.dark-mode h1 { color:#fff; }
-body.dark-mode .card { background:#000; border: 1px solid #f90505; }
-body.dark-mode .card:hover { background:#000; border: 2px solid #00a6ffd7; }
-
-/* PERSONAL CARD */
-body.dark-mode #personal-card h2{ color:#00ff00; }
-body.dark-mode #personal-card .bio { color:#00a6ffd7; }
-body.dark-mode #personal-card .info p { color:#ffffff; }
-
-/* CONTACT CARD */
-body.dark-mode #contact-card h2 { color:#00ff00; }
-body.dark-mode #contact-card .info p { color:#ffffff; }
-body.dark-mode #contact-card .links a { background:#00a6ffef; color:#fff; }
-body.dark-mode #contact-card .links a:hover { background-color:#28a745; }
-
-/* SKILLS CARD */
-body.dark-mode #skills-card h2{color:#00ff00;}
-body.dark-mode #skills-card .skill-name { color:#fff; }
-body.dark-mode #skills-card .skill-fill { background:#00a6ffd7; }
-
-/* PROJECTS CARD (dark aesthetic) */
-body.dark-mode #projects-card h2 { color:#00a6ffd7; }
-body.dark-mode .project-card {
-  background:#0b0b0b;
-  border: 1px solid rgba(255,255,255,0.12);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.45);
-}
-body.dark-mode .project-card a { color:#ffffff; }
-body.dark-mode .project-card:hover{
-  border-color: rgba(0,166,255,0.70);
-  background: #0b0b0b;
-  box-shadow: 0 18px 32px rgba(0,0,0,0.65);
-}
-
-/* ----------------------
-   CLOCK CARD
------------------------ */
-#clock-card{
-  position: relative;
-  overflow: hidden;
-  text-align: center;
-  border-radius:15px;
-  padding:25px;
-  width:350px;
-  margin:20px;
-  will-change: transform, box-shadow;
-  transition: 
-    background 1s, 
-    color 0.5s, 
-    border 0.5s,
-    transform 450ms cubic-bezier(.2,.8,.2,1),
-    box-shadow 450ms cubic-bezier(.2,.8,.2,1);
-}
-
-#clock-card .clock-container { padding:20px; position: relative; }
-
-/* Emojis */
-#clock-card .emoji{
-  position: absolute;
-  font-size:40px;
-  opacity:0.92;
-  transition: transform 0.35s ease, filter 0.35s ease;
-  z-index:2;
-  pointer-events:auto;
-}
-#clock-card .time-emoji { top: 10%; left: 5%; }
-#clock-card .weather-emoji { top: 10%; right: 5%; }
-
-/* glass display */
-/* ✅ Inside clock: hover effect + border glow (smooth) */
-/* ✅ CLOCK DISPLAY (base) */
-#clock-card .clock-display{
-  padding:15px;
-  border-radius:14px;
-  display:inline-block;
-  background: rgba(255,255,255,0.80);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-
-  border: 2px solid rgba(255,255,255,0.45);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
-
-  position: relative;
-  z-index:1;
-
-  /* smooth + neon ready */
-  will-change: transform, box-shadow, border-color;
-  transition:
-    transform 380ms cubic-bezier(.2,.8,.2,1),
-    box-shadow 380ms cubic-bezier(.2,.8,.2,1),
-    border-color 380ms ease,
-    background 380ms ease;
-}
-
-/* ✅ HOVER (old neon feel কিন্তু smooth) */
-#clock-card .clock-display:hover{
-  transform: translateY(-8px);          /* smooth lift */
-  border-color: rgba(0,166,255,0.90);   /* glow border */
-
-  /* bring back your old neon vibe */
-  box-shadow:
-    0 18px 45px rgba(0,0,0,0.32),
-    0 0 15px rgba(6,243,128,0.55),
-    0 0 20px rgba(12,225,186,0.45),
-    0 0 45px rgba(12,12,12,0.55);
-}
-
-
-
-#clock-card .time{
-  font-size:40px;
-  font-weight:800;
-  letter-spacing: 1px;
-  margin-top:30px;
-  line-height:1.2;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.35);
-  color:#0b2b45;
-}
-#clock-card .date{
-  font-size:18px;
-  margin-top:5px;
-  font-weight:700;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.25);
-  color:#163a57;
-}
-#clock-card .day{
-  font-size:16px;
-  margin-top:5px;
-  font-weight:700;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.25);
-  color:#163a57;
-}
-@media (max-width: 500px){
-  #clock-card{ width: 92%; }
-  #clock-card .time{ font-size:30px; }
-}
-
-/* ✅ Dark mode: clock display always dark */
-body.dark-mode #clock-card .clock-display{
-  background: rgba(0,0,0,0.68) !important;
-  border: 2px solid rgba(255,255,255,0.18) !important;
-}
-body.dark-mode #clock-card .time,
-body.dark-mode #clock-card .date,
-body.dark-mode #clock-card .day{
-  color: #ffffff !important;
-}
-
-/* ✅ Emoji hover effect (direct hover) */
-#clock-card .emoji:hover{
-  transform: scale(1.25) rotate(-10deg);
-  filter: drop-shadow(0 0 10px rgba(255,255,255,0.75));
-}
-/* Better: use container hover to affect both emojis */
-#clock-card .clock-container:hover .emoji{
-  transform: scale(1.18) rotate(-8deg);
-  filter: drop-shadow(0 0 10px rgba(255,255,255,0.65));
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MD. Asaduzzaman Rony | Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
+  <!-- Background effects -->
+  <div class="bg" aria-hidden="true">
+    <div class="bg__shimmer"></div>
+    <div class="bg__conic"></div>
+    <div class="bg__noise"></div>
+  </div>
 
-<!-- Theme Toggle -->
-<div id="theme-toggle" title="Toggle Dark/Light Mode">🌙</div>
+  <header class="topbar">
+    <nav class="nav">
+      <a class="brand" href="#home">Rony</a>
 
-<!-- Profile Picture -->
-<div class="profile-pic-container" id="profile-container">
-  <img id="profilePic" src="https://rony49057.github.io/ronyaiub/profilepic.jpg" alt="Profile Picture">
-</div>
+      <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
 
-<h1>Asaduzzaman Rony</h1>
+      <ul class="nav__links">
+        <li><a class="nav__link active" href="#home" data-target="home">Home</a></li>
+        <li><a class="nav__link" href="#about" data-target="about">About</a></li>
+        <li><a class="nav__link" href="#education" data-target="education">Education</a></li>
+        <li><a class="nav__link" href="#skills" data-target="skills">Skill</a></li>
+        <li><a class="nav__link" href="#projects" data-target="projects">Project</a></li>
+        <li><a class="nav__link" href="#certificates" data-target="certificates">Certificate</a></li>
+        <li><a class="nav__link" href="#contact" data-target="contact">Contact</a></li>
+      </ul>
 
-<div class="cards-container">
+      <button class="themeBtn" type="button" aria-label="Toggle theme">
+        <span id="themeIcon" class="themeBtn__icon" aria-hidden="true">☾</span>
+      </button>
+    </nav>
+  </header>
 
-  <div class="card" id="personal-card">
-    <h2>Personal Information</h2>
-    <div class="bio" id="bio"></div>
-    <div class="info">
-      <p><strong>DOB:</strong> 11 Dec</p>
-      <p><strong>University:</strong> American International University-Bangladesh, BSc in CSE</p>
-      <p><strong>College:</strong> Ispahani Public School and College, 2019</p>
-      <p><strong>School:</strong> Comilla Cantonment High School, 2017</p>
-      <p><strong>Blood Group:</strong> B+</p>
-      <p><strong>Hobbies:</strong> Watching football ⚽, supporting Barcelona & Argentina</p>
-      <p><strong>Languages:</strong> Bangla, English, Hindi</p>
+  <main>
+    <!-- HOME -->
+    <section id="home" class="section glowSection">
+      <div class="container">
+        <div class="sectionCard heroCard">
+          <div class="hero__media">
+            <button class="hero__picBtn" type="button" aria-label="Open profile popup">
+              <img id="profilePic" class="hero__pic" src="image/pic1.jpg" alt="MD. Asaduzzaman Rony" />
+            </button>
+            <div class="hero__frame" aria-hidden="true"></div>
+          </div>
+
+          <div class="hero__content">
+            <!-- Letter-by-letter -->
+            <h1 id="nameType" class="nameType" aria-label="MD. ASADUZZAMAN RONY"></h1>
+
+            <p class="hero__tag">CSE Graduate • Web Developer • Project-based Learner</p>
+
+            <div class="socialRow">
+              <a class="socialBtn" href="https://www.facebook.com/rony49057" target="_blank" rel="noopener noreferrer">
+                <img src="image/facebook.png" alt="Facebook" />
+              </a>
+              <a class="socialBtn" href="https://www.instagram.com/rony_49057" target="_blank" rel="noopener noreferrer">
+                <img src="image/instagram.png" alt="Instagram" />
+              </a>
+              <a class="socialBtn" href="https://github.com/rony49057" target="_blank" rel="noopener noreferrer">
+                <img src="image/github.png" alt="GitHub" />
+              </a>
+              <a class="socialBtn" href="https://www.linkedin.com/in/rony49057/" target="_blank" rel="noopener noreferrer">
+                <img src="image/linkedin.png" alt="LinkedIn" />
+              </a>
+              <a class="socialBtn" href="mailto:ronyaiubcse@gmail.com" target="_blank" rel="noopener noreferrer">
+                <img src="image/mail.png" alt="Email" />
+              </a>
+              <a class="socialBtn" href="https://wa.me/8801787024458" target="_blank" rel="noopener noreferrer">
+                <img src="image/whatsapp.png" alt="WhatsApp" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section glowSection">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>About</h2>
+        </div>
+
+        <div class="sectionCard hoverCard">
+          <p class="para">
+            I am a Computer Science & Engineering graduate with a strong interest in building clean, responsive,
+            and user-focused web applications. I enjoy working with HTML, CSS, JavaScript, and problem-solving through
+            real-world projects. My academic background and hands-on project experience have helped me develop a solid
+            foundation in software development, databases, and system design. I am always eager to learn new technologies
+            and improve my skills by building practical solutions.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="section glowSection">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>Education</h2>
+        </div>
+
+        <div class="sectionCard hoverCard">
+          <div class="stack">
+            <article class="itemCard hoverCardInner">
+              <h3>American International University-Bangladesh</h3>
+              <p class="muted">BSc in CSE</p>
+            </article>
+
+            <article class="itemCard hoverCardInner">
+              <h3>Ispahani Public School and College</h3>
+              <p class="muted">HSC — 2019</p>
+            </article>
+
+            <article class="itemCard hoverCardInner">
+              <h3>Ispahani Public School and College</h3>
+              <p class="muted">SSC — 2017</p>
+            </article>
+
+            <article class="itemCard hoverCardInner">
+              <h3>Cumilla Cantonment High School</h3>
+              <p class="muted">JSC — 2014</p>
+            </article>
+
+            <article class="itemCard hoverCardInner">
+              <h3>Cumilla Cantonment High School</h3>
+              <p class="muted">PSC — 2011</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section glowSection">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>Skills</h2>
+        </div>
+
+        <div class="sectionCard hoverCard">
+          <div class="grid grid--4">
+            <div class="skillCard hoverCardInner">HTML</div>
+            <div class="skillCard hoverCardInner">CSS</div>
+            <div class="skillCard hoverCardInner">JavaScript</div>
+            <div class="skillCard hoverCardInner">PHP</div>
+            <div class="skillCard hoverCardInner">Java</div>
+            <div class="skillCard hoverCardInner">C#</div>
+            <div class="skillCard hoverCardInner">C++</div>
+            <div class="skillCard hoverCardInner">Database</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section glowSection">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>Projects</h2>
+        </div>
+
+        <div class="sectionCard hoverCard">
+          <div class="grid grid--3 projGrid">
+
+            <!-- Web Tech -->
+            <div class="flipCard">
+              <div class="flipCard__inner">
+                <div class="flipCard__front">
+                  <h3>MobileMart</h3>
+                  <div class="badges">
+                    <span class="badge">HTML</span>
+                    <span class="badge">CSS</span>
+                    <span class="badge">JS</span>
+                    <span class="badge">PHP</span>
+                  </div>
+                </div>
+                <div class="flipCard__back">
+                  <div class="backTitle">MobileMart</div>
+                  <a class="btn" href="https://github.com/rony49057/MobileMart" target="_blank" rel="noopener noreferrer">
+                    View Code
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- C# -->
+            <div class="flipCard">
+              <div class="flipCard__inner">
+                <div class="flipCard__front">
+                  <h3>Bookshop Management</h3>
+                  <div class="badges">
+                    <span class="badge">C#</span>
+                  </div>
+                </div>
+                <div class="flipCard__back">
+                  <div class="backTitle">Bookshop Management</div>
+                  <a class="btn" href="https://github.com/rony49057/c-sharp-project" target="_blank" rel="noopener noreferrer">
+                    View Code
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Java -->
+            <div class="flipCard">
+              <div class="flipCard__inner">
+                <div class="flipCard__front">
+                  <h3>Java Project</h3>
+                  <div class="badges">
+                    <span class="badge">Java</span>
+                  </div>
+                </div>
+                <div class="flipCard__back">
+                  <div class="backTitle">Java Project</div>
+                  <a class="btn" href="https://github.com/rony49057/java-project" target="_blank" rel="noopener noreferrer">
+                    View Code
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Database -->
+            <div class="flipCard">
+              <div class="flipCard__inner">
+                <div class="flipCard__front">
+                  <h3>Bookshop Management (DB)</h3>
+                  <div class="badges">
+                    <span class="badge">Oracle</span>
+                    <span class="badge">SQL</span>
+                  </div>
+                </div>
+                <div class="flipCard__back">
+                  <div class="backTitle">Bookshop Management (DB)</div>
+                  <a class="btn" href="https://github.com/rony49057/Bookshop-Management-Oracle-Database-" target="_blank" rel="noopener noreferrer">
+                    View Code
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- CG -->
+            <div class="flipCard">
+              <div class="flipCard__inner">
+                <div class="flipCard__front">
+                  <h3>Computer Graphics</h3>
+                  <div class="badges">
+                    <span class="badge">C/C++</span>
+                  </div>
+                </div>
+                <div class="flipCard__back">
+                  <div class="backTitle">Computer Graphics</div>
+                  <a class="btn" href="https://github.com/rony49057/cg" target="_blank" rel="noopener noreferrer">
+                    View Code
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- SE -->
+            <div class="flipCard">
+              <div class="flipCard__inner">
+                <div class="flipCard__front">
+                  <h3>Project Simulator Sigma</h3>
+                  <div class="badges">
+                    <span class="badge">Software Eng</span>
+                  </div>
+                </div>
+                <div class="flipCard__back">
+                  <div class="backTitle">Project Simulator Sigma</div>
+                  <a class="btn" href="https://github.com/rony49057/project-simulator-sigma" target="_blank" rel="noopener noreferrer">
+                    View Code
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATES -->
+    <section id="certificates" class="section glowSection">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>Certificates</h2>
+        </div>
+
+        <div class="sectionCard hoverCard">
+          <div class="certGrid">
+            <button class="certCard hoverCardInner" type="button" data-cert="image/c1.jpg">
+              <img src="image/c1.jpg" alt="Certificate c1" />
+              <div class="certCard__name">c1</div>
+            </button>
+            <button class="certCard hoverCardInner" type="button" data-cert="image/c2.jpg">
+              <img src="image/c2.jpg" alt="Certificate c2" />
+              <div class="certCard__name">c2</div>
+            </button>
+            <button class="certCard hoverCardInner" type="button" data-cert="image/c3.jpg">
+              <img src="image/c3.jpg" alt="Certificate c3" />
+              <div class="certCard__name">c3</div>
+            </button>
+            <button class="certCard hoverCardInner" type="button" data-cert="image/c4.jpg">
+              <img src="image/c4.jpg" alt="Certificate c4" />
+              <div class="certCard__name">c4</div>
+            </button>
+            <button class="certCard hoverCardInner" type="button" data-cert="image/c5.jpg">
+              <img src="image/c5.jpg" alt="Certificate c5" />
+              <div class="certCard__name">c5</div>
+            </button>
+            <button class="certCard hoverCardInner" type="button" data-cert="image/c6.jpg">
+              <img src="image/c6.jpg" alt="Certificate c6" />
+              <div class="certCard__name">c6</div>
+            </button>
+            <button class="certCard hoverCardInner" type="button" data-cert="image/c7.jpg">
+              <img src="image/c7.jpg" alt="Certificate c7" />
+              <div class="certCard__name">c7</div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section glowSection">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>Contact</h2>
+        </div>
+
+        <div class="sectionCard hoverCard">
+          <div class="contactText">
+            <p><span class="label">Phone:</span>
+              <a class="link" href="https://wa.me/8801787024458" target="_blank" rel="noopener noreferrer">+8801787024458</a>
+            </p>
+            <p><span class="label">Email:</span>
+              <a class="link" href="mailto:ronyaiubcse@gmail.com" target="_blank" rel="noopener noreferrer">ronyaiubcse@gmail.com</a>
+            </p>
+            <p><span class="label">GitHub:</span>
+              <a class="link" href="https://github.com/rony49057" target="_blank" rel="noopener noreferrer">github.com/rony49057</a>
+            </p>
+            <p><span class="label">LinkedIn:</span>
+              <a class="link" href="https://www.linkedin.com/in/rony49057/" target="_blank" rel="noopener noreferrer">linkedin.com/in/rony49057</a>
+            </p>
+          </div>
+
+          <div class="socialRow socialRow--big">
+            <a class="socialBtn" href="https://www.facebook.com/rony49057" target="_blank" rel="noopener noreferrer"><img src="image/facebook.png" alt="Facebook" /></a>
+            <a class="socialBtn" href="https://www.instagram.com/rony_49057" target="_blank" rel="noopener noreferrer"><img src="image/instagram.png" alt="Instagram" /></a>
+            <a class="socialBtn" href="https://github.com/rony49057" target="_blank" rel="noopener noreferrer"><img src="image/github.png" alt="GitHub" /></a>
+            <a class="socialBtn" href="https://www.linkedin.com/in/rony49057/" target="_blank" rel="noopener noreferrer"><img src="image/linkedin.png" alt="LinkedIn" /></a>
+            <a class="socialBtn" href="mailto:ronyaiubcse@gmail.com" target="_blank" rel="noopener noreferrer"><img src="image/mail.png" alt="Email" /></a>
+            <a class="socialBtn" href="https://wa.me/8801787024458" target="_blank" rel="noopener noreferrer"><img src="image/whatsapp.png" alt="WhatsApp" /></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p id="footerText" class="muted"></p>
+    </div>
+  </footer>
+
+  <!-- Profile Modal (Picture + Icons only) -->
+  <div class="modal" id="profileModal" aria-hidden="true">
+    <div class="modal__overlay" data-close="profile"></div>
+    <div class="modal__panel">
+      <button class="modal__close" type="button" aria-label="Close popup" data-close="profile">✕</button>
+
+      <div class="modalProfile">
+        <img id="modalPic" class="modalPic" src="image/pic1.jpg" alt="Profile picture" />
+        <h3 class="modalName">MD. ASADUZZAMAN RONY</h3>
+
+        <div class="socialRow socialRow--big">
+          <a class="socialBtn" href="https://www.facebook.com/rony49057" target="_blank" rel="noopener noreferrer"><img src="image/facebook.png" alt="Facebook" /></a>
+          <a class="socialBtn" href="https://www.instagram.com/rony_49057" target="_blank" rel="noopener noreferrer"><img src="image/instagram.png" alt="Instagram" /></a>
+          <a class="socialBtn" href="https://github.com/rony49057" target="_blank" rel="noopener noreferrer"><img src="image/github.png" alt="GitHub" /></a>
+          <a class="socialBtn" href="https://www.linkedin.com/in/rony49057/" target="_blank" rel="noopener noreferrer"><img src="image/linkedin.png" alt="LinkedIn" /></a>
+          <a class="socialBtn" href="mailto:ronyaiubcse@gmail.com" target="_blank" rel="noopener noreferrer"><img src="image/mail.png" alt="Email" /></a>
+          <a class="socialBtn" href="https://wa.me/8801787024458" target="_blank" rel="noopener noreferrer"><img src="image/whatsapp.png" alt="WhatsApp" /></a>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="card" id="contact-card">
-    <h2>Contact Information</h2>
-    <div class="info">
-      <p><strong>Phone:</strong> 017*******8</p>
-      <p><strong>Email:</strong> ronyaiubcse@gmail.com</p>
-      <p><strong>City:</strong> Dhaka</p>
-    </div>
-    <div class="links">
-      <a href="https://www.facebook.com/rony49057" target="_blank">Facebook</a>
-      <a href="https://www.instagram.com/rony_49057" target="_blank">Instagram</a>
-      <a href="https://github.com/rony49057" target="_blank">GitHub</a>
+  <!-- Certificate Modal -->
+  <div class="modal" id="certModal" aria-hidden="true">
+    <div class="modal__overlay" data-close="cert"></div>
+    <div class="modal__panel modal__panel--wide">
+      <button class="modal__close" type="button" aria-label="Close certificate" data-close="cert">✕</button>
+      <img id="certBig" class="certBig" src="" alt="Certificate large view" />
     </div>
   </div>
 
-  <div class="card" id="skills-card">
-    <h2>Skills</h2>
-    <div class="skill"><span class="skill-name">HTML / CSS</span><div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div></div>
-    <div class="skill"><span class="skill-name">Java Script</span><div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div></div>
-    <div class="skill"><span class="skill-name">PHP</span><div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div></div>
-    <div class="skill"><span class="skill-name">Java</span><div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div></div>
-    <div class="skill"><span class="skill-name">C#</span><div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div></div>
-    <div class="skill"><span class="skill-name">C++</span><div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div></div>
-    <div class="skill"><span class="skill-name">Database Management</span><div class="skill-bar"><div class="skill-fill" style="width:0%;"></div></div></div>
-  </div>
-
-  <div class="card" id="projects-card">
-    <h2>Projects</h2>
-    <div class="projects">
-      <div class="project-card"><a href="https://github.com/rony49057/java-project" target="_blank">Java Project</a></div>
-      <div class="project-card"><a href="https://github.com/rony49057/c-sharp-project" target="_blank">C# Project</a></div>
-      <div class="project-card"><a href="https://github.com/rony49057/cg" target="_blank">C++ / CG Project</a></div>
-      <div class="project-card"><a href="https://github.com/rony49057/MobileMart" target="_blank">Webtech Project</a></div>
-          <div class="project-card"><a href="https://github.com/rony49057/Bookshop-Management-Oracle-Database-" target="_blank">Database Project</a></div>
-      <div class="project-card"><a href="https://github.com/rony49057/project-simulator-sigma" target="_blank">Software Engineering Project</a></div>
-
-    </div>
-  </div>
-
-</div>
-
-<!-- POPUP -->
-<div class="popup-overlay" id="popup">
-  <div class="popup-box">
-    <button class="close-btn" id="closePopup">×</button>
-    <img id="popupPic" src="" alt="Profile">
-    <h3 id="popupName"></h3>
-    <p id="popupDob"></p>
-    <p id="popupUniversity"></p>
-    <p id="popupCollege"></p>
-    <p id="popupSchool"></p>
-    <p id="popupPhone"></p>
-    <p id="popupEmail"></p>
-    <div class="links">
-      <a href="https://www.facebook.com/rony49057" target="_blank">Facebook</a>
-      <a href="https://www.instagram.com/rony_49057" target="_blank">Instagram</a>
-    </div>
-  </div>
-</div>
-
-<!-- CLOCK CARD -->
-<p><br></p>
-<div class="card" id="clock-card">
-  <h2 style="color:blue;"><b>Time</b></h2>
-  <div class="clock-container" id="clockContainer">
-    <div class="emoji time-emoji" id="timeEmoji">☀️</div>
-    <div class="emoji weather-emoji" id="weatherEmoji">🌤️</div>
-
-    <div class="clock-display" id="clockDisplay">
-      <div class="time" id="clockTime">00:00:00</div>
-      <div class="date" id="clockDate">January 1, 2025</div>
-      <div class="day" id="clockDay">Wednesday</div>
-    </div>
-  </div>
-</div>
-
-<footer>© <span id="year"></span> Asaduzzaman Rony | All rights reserved.</footer>
-
-<script>
-// ----------------------
-// TYPING BIO ANIMATION
-const phrases=["Disciplined ","Passionate about coding ","⚽ Barcelona & Argentina ⚽ "];
-let i=0,j=0,current='',isDeleting=false;
-const bioEl=document.getElementById('bio');
-
-function type(){
-  const full=phrases[i];
-  current=isDeleting?full.substring(0,j--):full.substring(0,j++);
-  bioEl.textContent=current;
-
-  if(!isDeleting && j===full.length){
-    isDeleting=true; setTimeout(type,1500);
-  }else if(isDeleting && j===0){
-    isDeleting=false; i=(i+1)%phrases.length; setTimeout(type,500);
-  }else{
-    setTimeout(type,isDeleting?50:100);
-  }
-}
-type();
-
-// SHOW CARDS ANIMATION
-document.querySelectorAll('.card').forEach((card,idx)=>{
-  setTimeout(()=>{card.classList.add('show');}, idx*300);
-});
-
-// SKILL BAR FILL
-const fills=document.querySelectorAll('.skill-fill');
-const widths=["80%","75%","80%","75%","75%","80%","80%"];
-fills.forEach((fill,idx)=>{
-  setTimeout(()=>{fill.style.width=widths[idx];},1000);
-});
-
-// DARK/LIGHT MODE TOGGLE
-const toggle=document.getElementById('theme-toggle');
-toggle.addEventListener('click',()=>{
-  document.body.classList.toggle('dark-mode');
-  toggle.textContent=document.body.classList.contains('dark-mode')?'☀️':'🌙';
-  updateProfileClock();
-});
-
-// PROFILE PIC DYNAMIC CHANGE
-const profilePics=[
-  "https://rony49057.github.io/ronyaiub/profilepic.jpg",
-  "https://rony49057.github.io/ronyaiub/profilepic2.jpg",
-  "https://rony49057.github.io/ronyaiub/profilepic3.jpg",
-  "https://rony49057.github.io/ronyaiub/profilepic4.jpg"
-];
-let picIndex=0;
-const profilePicEl=document.getElementById("profilePic");
-
-setInterval(()=>{
-  profilePicEl.style.opacity=0;
-  setTimeout(()=>{
-    picIndex=(picIndex+1)%profilePics.length;
-    profilePicEl.src=profilePics[picIndex];
-    profilePicEl.style.opacity=1;
-  },800);
-},5000);
-
-// POPUP FUNCTIONALITY
-const popup=document.getElementById("popup");
-const closePopup=document.getElementById("closePopup");
-const profileContainer=document.getElementById("profile-container");
-
-const popupData={
-  name:"Asaduzzaman Rony",
-  dob:"DOB: 11 Dec 2001",
-  university:"American International University-Bangladesh, BSc in CSE",
-  college:"Ispahani Public School and College, 2019",
-  school:"Comilla Cantonment High School, 2017",
-  phone:"017*******8",
-  email:"ronyaiubcse@gmail.com"
-};
-
-profileContainer.addEventListener("click",()=>{
-  document.getElementById("popupPic").src=profilePics[picIndex];
-  document.getElementById("popupName").textContent=popupData.name;
-  document.getElementById("popupDob").textContent=popupData.dob;
-  document.getElementById("popupUniversity").textContent=popupData.university;
-  document.getElementById("popupCollege").textContent=popupData.college;
-  document.getElementById("popupSchool").textContent=popupData.school;
-  document.getElementById("popupPhone").textContent=popupData.phone;
-  document.getElementById("popupEmail").textContent=popupData.email;
-  popup.classList.add("active");
-});
-closePopup.addEventListener("click",()=>popup.classList.remove("active"));
-popup.addEventListener("click",(e)=>{ if(e.target===popup) popup.classList.remove("active"); });
-
-// AUTO FOOTER YEAR
-document.getElementById("year").textContent=new Date().getFullYear();
-
-// ===== CLOCK + LOCATION WEATHER =====
-const clockDisplay = document.getElementById("clockDisplay");
-const timeEmojiEl = document.getElementById("timeEmoji");
-const weatherEmojiEl = document.getElementById("weatherEmoji");
-
-function weatherCodeToEmoji(code, isNight){
-  if(code === 0) return isNight ? "🌙" : "☀️";
-  if(code === 1 || code === 2) return isNight ? "☁️" : "🌤️";
-  if(code === 3) return "☁️";
-  if(code === 45 || code === 48) return "🌫️";
-  if(code === 51 || code === 53 || code === 55) return "🌦️";
-  if(code === 61 || code === 63 || code === 65) return "🌧️";
-  if(code === 66 || code === 67) return "🌧️";
-  if(code === 71 || code === 73 || code === 75 || code === 77) return "❄️";
-  if(code === 80 || code === 81 || code === 82) return "🌧️";
-  if(code === 85 || code === 86) return "🌨️";
-  if(code === 95 || code === 96 || code === 99) return "⛈️";
-  return "🌤️";
-}
-
-async function updateWeatherByLocation(){
-  const fallback = { lat: 23.8103, lon: 90.4125 }; // Dhaka fallback
-
-  function getPos(){
-    return new Promise((resolve, reject)=>{
-      if(!navigator.geolocation) return reject("Geolocation not supported");
-      navigator.geolocation.getCurrentPosition(
-        (pos)=>resolve({ lat: pos.coords.latitude, lon: pos.coords.longitude }),
-        (err)=>reject(err),
-        { enableHighAccuracy: true, timeout: 8000, maximumAge: 600000 }
-      );
-    });
-  }
-
-  let coords = fallback;
-  try { coords = await getPos(); } catch(e) { coords = fallback; }
-
-  const url = `https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lon}&current=weather_code,is_day&timezone=auto`;
-
-  try{
-    const res = await fetch(url);
-    const data = await res.json();
-    const code = data?.current?.weather_code;
-    const isDay = data?.current?.is_day;
-
-    if(typeof code === "number"){
-      weatherEmojiEl.textContent = weatherCodeToEmoji(code, isDay === 0);
-    }else{
-      weatherEmojiEl.textContent = "🌤️";
-    }
-  }catch(e){
-    weatherEmojiEl.textContent = "🌤️";
-  }
-}
-
-// time emoji (avoid same as weather)
-function timeStatusEmoji(hours){
-  if(hours>=6 && hours<9) return "🌅";
-  if(hours>=9 && hours<12) return "🌞";
-  if(hours>=12 && hours<15) return "🕒";
-  if(hours>=15 && hours<18) return "🌤️";
-  if(hours>=18 && hours<20) return "🌇";
-  if(hours>=20 && hours<24) return "🌙";
-  return "🌌";
-}
-
-function updateProfileClock(){
-  const now = new Date();
-  const hours = now.getHours();
-  const minutes = now.getMinutes();
-  const seconds = now.getSeconds();
-
-  const ampm = hours >= 12 ? "PM" : "AM";
-  const hour12 = hours % 12 || 12;
-
-  document.getElementById("clockTime").textContent =
-    `${hour12.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')} ${ampm}`;
-
-  const options = { year:'numeric', month:'long', day:'numeric' };
-  document.getElementById("clockDate").textContent = now.toLocaleDateString('en-US', options);
-
-  const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  document.getElementById("clockDay").textContent = days[now.getDay()];
-
-  // background gradient (keep your original)
-  const clockCard = document.getElementById("clock-card");
-  let bg = "";
-
-  if(hours>=6 && hours<9){ bg="linear-gradient(135deg, #FFFB7D, #FFD700)"; }
-  else if(hours>=9 && hours<12){ bg="linear-gradient(135deg, #87CEFA, #00BFFF)"; }
-  else if(hours>=12 && hours<15){ bg="linear-gradient(135deg, #00BFFF, #1E90FF)"; }
-  else if(hours>=15 && hours<18){ bg="linear-gradient(135deg, #87CEFA, #FFD700)"; }
-  else if(hours>=18 && hours<20){ bg="linear-gradient(135deg, #FF7E5F, #2C3E50)"; }
-  else if(hours>=20 && hours<24){ bg="linear-gradient(135deg, #2C3E50, #000046)"; }
-  else { bg="linear-gradient(135deg, #2C3E50, #000022)"; }
-
-  clockCard.style.background = bg;
-
-  // set time emoji
-  timeEmojiEl.textContent = timeStatusEmoji(hours);
-
-  // contrast behavior (same as your logic)
-  const isDarkMode = document.body.classList.contains("dark-mode");
-  const timeEl = document.getElementById("clockTime");
-  const dateEl = document.getElementById("clockDate");
-  const dayEl  = document.getElementById("clockDay");
-  const isDarkBgTime = (hours >= 18 || hours < 6);
-
-  if(isDarkMode){
-    clockDisplay.style.background = "rgba(0,0,0,0.68)";
-    clockDisplay.style.border = "2px solid rgba(255,255,255,0.18)";
-    timeEl.style.color = "#ffffff";
-    dateEl.style.color = "#f2f2f2";
-    dayEl.style.color  = "#f2f2f2";
-  } else {
-    if(isDarkBgTime){
-      clockDisplay.style.background = "rgba(0,0,0,0.60)";
-      clockDisplay.style.border = "2px solid rgba(255,255,255,0.20)";
-      timeEl.style.color = "#ffffff";
-      dateEl.style.color = "#eaeaea";
-      dayEl.style.color  = "#eaeaea";
-    } else {
-      clockDisplay.style.background = "rgba(255,255,255,0.80)";
-      clockDisplay.style.border = "2px solid rgba(255,255,255,0.45)";
-      timeEl.style.color = "#0b2b45";
-      dateEl.style.color = "#163a57";
-      dayEl.style.color  = "#163a57";
-    }
-  }
-}
-
-// Update clock every second
-setInterval(updateProfileClock, 1000);
-updateProfileClock();
-
-// Update weather now + every 10 minutes
-updateWeatherByLocation();
-setInterval(updateWeatherByLocation, 10 * 60 * 1000);
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
