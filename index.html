@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <!-- Background effects -->
+  <!-- Background effects (same structure for dark & light) -->
   <div class="bg" aria-hidden="true">
     <div class="bg__shimmer"></div>
     <div class="bg__conic"></div>
@@ -43,7 +43,7 @@
     <!-- HOME -->
     <section id="home" class="section glowSection">
       <div class="container">
-        <div class="sectionCard heroCard">
+        <div class="sectionCard heroCard hoverCard">
           <div class="hero__media">
             <button class="hero__picBtn" type="button" aria-label="Open profile popup">
               <img id="profilePic" class="hero__pic" src="image/pic1.jpg" alt="MD. Asaduzzaman Rony" />
@@ -52,10 +52,9 @@
           </div>
 
           <div class="hero__content">
-            <!-- Letter-by-letter -->
-            <h1 id="nameType" class="nameType" aria-label="MD. ASADUZZAMAN RONY"></h1>
+            <h1 id="nameType" class="nameType hoverName" aria-label="MD. ASADUZZAMAN RONY"></h1>
 
-            <p class="hero__tag">CSE Graduate • Web Developer • Project-based Learner</p>
+            <p class="hero__tag">Web Developer • Data Analyst</p>
 
             <div class="socialRow">
               <a class="socialBtn" href="https://www.facebook.com/rony49057" target="_blank" rel="noopener noreferrer">
@@ -85,9 +84,7 @@
     <!-- ABOUT -->
     <section id="about" class="section glowSection">
       <div class="container">
-        <div class="sectionHead">
-          <h2>About</h2>
-        </div>
+        <div class="sectionHead"><h2>About</h2></div>
 
         <div class="sectionCard hoverCard">
           <p class="para">
@@ -104,9 +101,7 @@
     <!-- EDUCATION -->
     <section id="education" class="section glowSection">
       <div class="container">
-        <div class="sectionHead">
-          <h2>Education</h2>
-        </div>
+        <div class="sectionHead"><h2>Education</h2></div>
 
         <div class="sectionCard hoverCard">
           <div class="stack">
@@ -142,9 +137,7 @@
     <!-- SKILLS -->
     <section id="skills" class="section glowSection">
       <div class="container">
-        <div class="sectionHead">
-          <h2>Skills</h2>
-        </div>
+        <div class="sectionHead"><h2>Skills</h2></div>
 
         <div class="sectionCard hoverCard">
           <div class="grid grid--4">
@@ -164,15 +157,12 @@
     <!-- PROJECTS -->
     <section id="projects" class="section glowSection">
       <div class="container">
-        <div class="sectionHead">
-          <h2>Projects</h2>
-        </div>
+        <div class="sectionHead"><h2>Projects</h2></div>
 
         <div class="sectionCard hoverCard">
           <div class="grid grid--3 projGrid">
 
-            <!-- Web Tech -->
-            <div class="flipCard">
+            <div class="flipCard jsFlip">
               <div class="flipCard__inner">
                 <div class="flipCard__front">
                   <h3>MobileMart</h3>
@@ -185,15 +175,12 @@
                 </div>
                 <div class="flipCard__back">
                   <div class="backTitle">MobileMart</div>
-                  <a class="btn" href="https://github.com/rony49057/MobileMart" target="_blank" rel="noopener noreferrer">
-                    View Code
-                  </a>
+                  <a class="btn" href="https://github.com/rony49057/MobileMart" target="_blank" rel="noopener noreferrer">View Code</a>
                 </div>
               </div>
             </div>
 
-            <!-- C# -->
-            <div class="flipCard">
+            <div class="flipCard jsFlip">
               <div class="flipCard__inner">
                 <div class="flipCard__front">
                   <h3>Bookshop Management</h3>
@@ -203,15 +190,12 @@
                 </div>
                 <div class="flipCard__back">
                   <div class="backTitle">Bookshop Management</div>
-                  <a class="btn" href="https://github.com/rony49057/c-sharp-project" target="_blank" rel="noopener noreferrer">
-                    View Code
-                  </a>
+                  <a class="btn" href="https://github.com/rony49057/c-sharp-project" target="_blank" rel="noopener noreferrer">View Code</a>
                 </div>
               </div>
             </div>
 
-            <!-- Java -->
-            <div class="flipCard">
+            <div class="flipCard jsFlip">
               <div class="flipCard__inner">
                 <div class="flipCard__front">
                   <h3>Java Project</h3>
@@ -221,15 +205,12 @@
                 </div>
                 <div class="flipCard__back">
                   <div class="backTitle">Java Project</div>
-                  <a class="btn" href="https://github.com/rony49057/java-project" target="_blank" rel="noopener noreferrer">
-                    View Code
-                  </a>
+                  <a class="btn" href="https://github.com/rony49057/java-project" target="_blank" rel="noopener noreferrer">View Code</a>
                 </div>
               </div>
             </div>
 
-            <!-- Database -->
-            <div class="flipCard">
+            <div class="flipCard jsFlip">
               <div class="flipCard__inner">
                 <div class="flipCard__front">
                   <h3>Bookshop Management (DB)</h3>
@@ -240,15 +221,12 @@
                 </div>
                 <div class="flipCard__back">
                   <div class="backTitle">Bookshop Management (DB)</div>
-                  <a class="btn" href="https://github.com/rony49057/Bookshop-Management-Oracle-Database-" target="_blank" rel="noopener noreferrer">
-                    View Code
-                  </a>
+                  <a class="btn" href="https://github.com/rony49057/Bookshop-Management-Oracle-Database-" target="_blank" rel="noopener noreferrer">View Code</a>
                 </div>
               </div>
             </div>
 
-            <!-- CG -->
-            <div class="flipCard">
+            <div class="flipCard jsFlip">
               <div class="flipCard__inner">
                 <div class="flipCard__front">
                   <h3>Computer Graphics</h3>
@@ -258,15 +236,12 @@
                 </div>
                 <div class="flipCard__back">
                   <div class="backTitle">Computer Graphics</div>
-                  <a class="btn" href="https://github.com/rony49057/cg" target="_blank" rel="noopener noreferrer">
-                    View Code
-                  </a>
+                  <a class="btn" href="https://github.com/rony49057/cg" target="_blank" rel="noopener noreferrer">View Code</a>
                 </div>
               </div>
             </div>
 
-            <!-- SE -->
-            <div class="flipCard">
+            <div class="flipCard jsFlip">
               <div class="flipCard__inner">
                 <div class="flipCard__front">
                   <h3>Project Simulator Sigma</h3>
@@ -276,9 +251,7 @@
                 </div>
                 <div class="flipCard__back">
                   <div class="backTitle">Project Simulator Sigma</div>
-                  <a class="btn" href="https://github.com/rony49057/project-simulator-sigma" target="_blank" rel="noopener noreferrer">
-                    View Code
-                  </a>
+                  <a class="btn" href="https://github.com/rony49057/project-simulator-sigma" target="_blank" rel="noopener noreferrer">View Code</a>
                 </div>
               </div>
             </div>
@@ -291,39 +264,43 @@
     <!-- CERTIFICATES -->
     <section id="certificates" class="section glowSection">
       <div class="container">
-        <div class="sectionHead">
-          <h2>Certificates</h2>
-        </div>
+        <div class="sectionHead"><h2>Certificates</h2></div>
 
         <div class="sectionCard hoverCard">
           <div class="certGrid">
             <button class="certCard hoverCardInner" type="button" data-cert="image/c1.jpg">
-              <img src="image/c1.jpg" alt="Certificate c1" />
-              <div class="certCard__name">c1</div>
+              <img src="image/c1.jpg" alt="Physics Contest" />
+              <div class="certCard__name">Physics Contest</div>
             </button>
+
             <button class="certCard hoverCardInner" type="button" data-cert="image/c2.jpg">
-              <img src="image/c2.jpg" alt="Certificate c2" />
-              <div class="certCard__name">c2</div>
+              <img src="image/c2.jpg" alt="Youtubing" />
+              <div class="certCard__name">Youtubing</div>
             </button>
+
             <button class="certCard hoverCardInner" type="button" data-cert="image/c3.jpg">
-              <img src="image/c3.jpg" alt="Certificate c3" />
-              <div class="certCard__name">c3</div>
+              <img src="image/c3.jpg" alt="CV Writing" />
+              <div class="certCard__name">CV Writing</div>
             </button>
+
             <button class="certCard hoverCardInner" type="button" data-cert="image/c4.jpg">
-              <img src="image/c4.jpg" alt="Certificate c4" />
-              <div class="certCard__name">c4</div>
+              <img src="image/c4.jpg" alt="Covid-19 Awareness" />
+              <div class="certCard__name">Covid-19 Awareness</div>
             </button>
+
             <button class="certCard hoverCardInner" type="button" data-cert="image/c5.jpg">
-              <img src="image/c5.jpg" alt="Certificate c5" />
-              <div class="certCard__name">c5</div>
+              <img src="image/c5.jpg" alt="Microsoft Excel Basic" />
+              <div class="certCard__name">Microsoft Excel Basic</div>
             </button>
+
             <button class="certCard hoverCardInner" type="button" data-cert="image/c6.jpg">
-              <img src="image/c6.jpg" alt="Certificate c6" />
-              <div class="certCard__name">c6</div>
+              <img src="image/c6.jpg" alt="Corona Virus Disease" />
+              <div class="certCard__name">Corona Virus Disease</div>
             </button>
+
             <button class="certCard hoverCardInner" type="button" data-cert="image/c7.jpg">
-              <img src="image/c7.jpg" alt="Certificate c7" />
-              <div class="certCard__name">c7</div>
+              <img src="image/c7.jpg" alt="Digital Security Essential" />
+              <div class="certCard__name">Digital Security Essential</div>
             </button>
           </div>
         </div>
@@ -333,9 +310,7 @@
     <!-- CONTACT -->
     <section id="contact" class="section glowSection">
       <div class="container">
-        <div class="sectionHead">
-          <h2>Contact</h2>
-        </div>
+        <div class="sectionHead"><h2>Contact</h2></div>
 
         <div class="sectionCard hoverCard">
           <div class="contactText">
@@ -372,7 +347,7 @@
     </div>
   </footer>
 
-  <!-- Profile Modal (Picture + Icons only) -->
+  <!-- Profile Modal -->
   <div class="modal" id="profileModal" aria-hidden="true">
     <div class="modal__overlay" data-close="profile"></div>
     <div class="modal__panel">
@@ -381,6 +356,7 @@
       <div class="modalProfile">
         <img id="modalPic" class="modalPic" src="image/pic1.jpg" alt="Profile picture" />
         <h3 class="modalName">MD. ASADUZZAMAN RONY</h3>
+        <p class="modalDob"><span class="dobLabel">DOB:</span> 11 Dec</p>
 
         <div class="socialRow socialRow--big">
           <a class="socialBtn" href="https://www.facebook.com/rony49057" target="_blank" rel="noopener noreferrer"><img src="image/facebook.png" alt="Facebook" /></a>
