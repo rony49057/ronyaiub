@@ -8,7 +8,7 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   if (el) el.textContent = `© ${y} MD. Asaduzzaman Rony. All rights reserved.`;
 })();
 
-// Theme
+// Theme toggle (persist)
 (() => {
   const body = document.body;
   const btn = $(".themeBtn");
@@ -21,8 +21,7 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
     if (icon) icon.textContent = isLight ? "☀" : "☾";
   };
 
-  const saved = localStorage.getItem(KEY);
-  apply(saved || "dark");
+  apply(localStorage.getItem(KEY) || "dark");
 
   btn?.addEventListener("click", () => {
     const next = body.classList.contains("light") ? "dark" : "light";
@@ -68,7 +67,7 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   });
 })();
 
-// Active section + parent glow (header hover + scroll)
+// Active section glow
 (() => {
   const sections = $$(".glowSection");
   const links = $$(".nav__link");
@@ -103,7 +102,7 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   });
 })();
 
-// Hero picture rotation + modal pic sync
+// Hero picture rotate + modal sync
 (() => {
   const img = $("#profilePic");
   const modalPic = $("#modalPic");
@@ -112,7 +111,6 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   let i = 1;
   const total = 7;
 
-  // preload
   for (let k = 1; k <= total; k++) {
     const im = new Image();
     im.src = `image/pic${k}.jpg`;
@@ -129,7 +127,6 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
     }, 240);
   };
 
-  // initial sync
   if (modalPic) modalPic.src = img.src;
 
   setInterval(() => {
@@ -152,14 +149,13 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
     if (idx >= text.length) return;
     el.textContent += text[idx];
     idx += 1;
-    // slow smooth
     setTimeout(tick, 90);
   };
 
   setTimeout(tick, 250);
 })();
 
-// Modals
+// Modals (profile + cert)
 (() => {
   const profileModal = $("#profileModal");
   const certModal = $("#certModal");
@@ -202,5 +198,51 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
     if (e.key !== "Escape") return;
     if (profileModal?.classList.contains("is-open")) closeModal(profileModal);
     if (certModal?.classList.contains("is-open")) closeModal(certModal);
+  });
+})();
+
+// Projects: mobile tap flip toggle (tap again = unflip)
+(() => {
+  const cards = $$(".flipCard");
+  if (!cards.length) return;
+
+  const isCoarse = window.matchMedia && window.matchMedia("(hover: none)").matches;
+
+  const toggleCard = (card) => {
+    card.classList.toggle("is-flipped");
+  };
+
+  const closeOthers = (current) => {
+    cards.forEach(c => { if (c !== current) c.classList.remove("is-flipped"); });
+  };
+
+  cards.forEach(card => {
+    // prevent toggle when clicking the View Code button
+    const btn = $(".btn", card);
+    btn?.addEventListener("click", (e) => e.stopPropagation());
+
+    // on touch devices: click toggles
+    card.addEventListener("click", () => {
+      if (!isCoarse) return;
+      const willFlip = !card.classList.contains("is-flipped");
+      closeOthers(card);
+      if (willFlip) card.classList.add("is-flipped");
+      else card.classList.remove("is-flipped");
+    });
+
+    // keyboard support
+    card.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      e.preventDefault();
+      closeOthers(card);
+      toggleCard(card);
+    });
+  });
+
+  // tap outside closes flipped
+  document.addEventListener("click", (e) => {
+    if (!isCoarse) return;
+    const inside = e.target instanceof HTMLElement && e.target.closest(".flipCard");
+    if (!inside) cards.forEach(c => c.classList.remove("is-flipped"));
   });
 })();
