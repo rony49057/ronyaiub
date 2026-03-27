@@ -293,3 +293,34 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
     if (!inside) cards.forEach(c => c.classList.remove("is-flipped"));
   });
 })();
+
+(function () {
+  emailjs.init({
+    publicKey: "sGwRcnNyqEJ52xSV6",
+  });
+})();
+
+const contactForm = document.getElementById("contact-form");
+const formStatus = document.getElementById("form-status");
+
+if (contactForm) {
+  contactForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    formStatus.textContent = "Sending...";
+    formStatus.style.color = "";
+
+    emailjs
+      .sendForm("service_rony49057", "template_tmxgme4", this)
+      .then(() => {
+        formStatus.textContent = "Message sent successfully!";
+        formStatus.style.color = "limegreen";
+        contactForm.reset();
+      })
+      .catch((error) => {
+        formStatus.textContent = "Failed to send message. Please try again.";
+        formStatus.style.color = "red";
+        console.error("EmailJS Error:", error);
+      });
+  });
+}

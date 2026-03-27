@@ -587,3 +587,55 @@ body.light .modal__overlay{ background: rgba(15,20,40,0.45); }
     scroll-behavior:auto !important;
   }
 }
+
+
+.message-form {
+  max-width: 700px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.message-form input,
+.message-form textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+  outline: none;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  color: inherit;
+  backdrop-filter: blur(8px);
+}
+
+.message-form input::placeholder,
+.message-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+body.light .message-form input,
+body.light .message-form textarea {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.7);
+  color: #111;
+}
+
+body.light .message-form input::placeholder,
+body.light .message-form textarea::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.message-form textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+#form-status {
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 600;
+}

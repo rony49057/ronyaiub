@@ -33,6 +33,7 @@
         <li><a class="nav__link" href="#projects" data-target="projects">Project</a></li>
         <li><a class="nav__link" href="#certificates" data-target="certificates">Certificate</a></li>
         <li><a class="nav__link" href="#contact" data-target="contact">Contact</a></li>
+        <li><a class="nav__link" href="#message" data-target="message">Message</a></li>
       </ul>
 
       <button class="themeBtn" type="button" aria-label="Toggle theme">
@@ -386,6 +387,35 @@
         </div>
       </div>
     </section>
+        <!-- MESSAGE -->
+    <section id="message" class="section glowSection">
+      <div class="container">
+        <div class="sectionHead"><h2>Send Message</h2></div>
+
+        <div class="sectionCard hoverCard">
+          <form id="contact-form" class="message-form">
+            <div class="input-group">
+              <input type="text" name="user_name" placeholder="Your Name" required>
+            </div>
+
+            <div class="input-group">
+              <input type="email" name="user_email" placeholder="Your Email" required>
+            </div>
+
+            <div class="input-group">
+              <input type="text" name="subject" placeholder="Subject" required>
+            </div>
+
+            <div class="input-group">
+              <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+            </div>
+
+            <button type="submit" class="btn">Send Message</button>
+            <p id="form-status"></p>
+          </form>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">
@@ -428,6 +458,8 @@
     </div>
   </div>
 
+   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+ 
   <script src="script.js"></script>
 </body>
 </html>
