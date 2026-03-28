@@ -294,6 +294,9 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   });
 })();
 
+
+//email code 
+
 (function () {
   emailjs.init({
     publicKey: "sGwRcnNyqEJ52xSV6",
@@ -302,25 +305,76 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
 const contactForm = document.getElementById("contact-form");
 const formStatus = document.getElementById("form-status");
+const sendBtn = document.getElementById("sendBtn");
+const successPopup = document.getElementById("successPopup");
+const popupClose = document.getElementById("popupClose");
+const popupOkBtn = document.getElementById("popupOkBtn");
+
+function openSuccessPopup() {
+  if (successPopup) {
+    successPopup.classList.add("show");
+    successPopup.setAttribute("aria-hidden", "false");
+  }
+}
+
+function closeSuccessPopup() {
+  if (successPopup) {
+    successPopup.classList.remove("show");
+    successPopup.setAttribute("aria-hidden", "true");
+  }
+}
+
+if (popupClose) {
+  popupClose.addEventListener("click", closeSuccessPopup);
+}
+
+if (popupOkBtn) {
+  popupOkBtn.addEventListener("click", closeSuccessPopup);
+}
+
+if (successPopup) {
+  successPopup.addEventListener("click", function (e) {
+    if (e.target === successPopup) {
+      closeSuccessPopup();
+    }
+  });
+}
+
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape") {
+    closeSuccessPopup();
+  }
+});
 
 if (contactForm) {
   contactForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    formStatus.textContent = "Sending...";
-    formStatus.style.color = "";
+    formStatus.textContent = "";
+
+    if (sendBtn) {
+      sendBtn.classList.add("loading");
+      sendBtn.disabled = true;
+      sendBtn.querySelector(".btn-text").textContent = "Sending...";
+    }
 
     emailjs
       .sendForm("service_rony49057", "template_tmxgme4", this)
       .then(() => {
-        formStatus.textContent = "Message sent successfully!";
-        formStatus.style.color = "limegreen";
         contactForm.reset();
+        openSuccessPopup();
       })
       .catch((error) => {
         formStatus.textContent = "Failed to send message. Please try again.";
         formStatus.style.color = "red";
         console.error("EmailJS Error:", error);
+      })
+      .finally(() => {
+        if (sendBtn) {
+          sendBtn.classList.remove("loading");
+          sendBtn.disabled = false;
+          sendBtn.querySelector(".btn-text").textContent = "Send Message";
+        }
       });
   });
 }

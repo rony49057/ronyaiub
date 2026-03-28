@@ -410,8 +410,11 @@
               <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
             </div>
 
-            <button type="submit" class="btn">Send Message</button>
-            <p id="form-status"></p>
+           <button type="submit" class="btn sendBtn" id="sendBtn">
+  <span class="btn-text">Send Message</span>
+  <span class="btn-loader"></span>
+</button>
+<p id="form-status"></p>
           </form>
         </div>
       </div>
@@ -455,6 +458,17 @@
     <div class="modal__panel modal__panel--wide">
       <button class="modal__close" type="button" aria-label="Close certificate" data-close="cert">✕</button>
       <img id="certBig" class="certBig" src="" alt="Certificate large view" />
+    </div>
+  </div>
+
+    <!-- Success Popup -->
+  <div class="popup" id="successPopup" aria-hidden="true">
+    <div class="popup__box">
+      <button class="popup__close" id="popupClose" type="button">✕</button>
+      <div class="popup__icon">✓</div>
+      <h3>Message Sent!</h3>
+      <p>Your message has been sent successfully.</p>
+      <button class="btn popupBtn" id="popupOkBtn" type="button">OK</button>
     </div>
   </div>
 
